@@ -5,3 +5,20 @@
 .beads-credential-key
 .beads/proxieddb/
 *.gate.lock*
+
+# Credentials
+.credentials.env
+.secrets/
+
+# Локальная копия бинарников (1.37 ГБ) — в git не идёт: 4 файла крупнее
+# жёсткого лимита GitHub в 100 MiB. В репозитории живёт только манифест
+# manifest/manifest.json с размерами и sha256.
+files/
+*.part
+
+# Каталоги загрузок: files/ — рабочий, files-pass1/ — эталонный снимок
+# первого прохода для сверки двух загрузок по sha256.
+files-pass1/
+.DS_Store
+__pycache__/
+*.pyc

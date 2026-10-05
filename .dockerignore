@@ -1,0 +1,11 @@
+# Локальная копия бинарников (1.37 ГБ) в образ не идёт: байты лежат в
+# GitHub Release, в образ попадает только манифест.
+files/
+*.part
+
+.git/
+.beads/
+.credentials.env
+.secrets/
+docs/
+manifest/source-urls.txt
