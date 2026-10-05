@@ -32,7 +32,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 FILES = ROOT / "files"
-MAPPING = ROOT / "manifest" / "mapping.json"
+# Проверять надо ВСЁ, что сервис раздаёт, то есть полный манифест.
+# mapping.json — это перенос ссылок портала downloads (98 файлов), и если
+# проверять по нему, 15 документов quantumart молча выпадают из проверки:
+# отчёт зелёный, а четверть состава не проверена.
+MANIFEST = ROOT / "manifest" / "manifest.json"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_migration import ASSET_SAFE  # noqa: E402  — тот же regex, что в nginx
@@ -74,9 +78,19 @@ def check_format(name: str, path: Path) -> str | None:
 
 
 def load() -> dict:
-    if not MAPPING.exists():
-        sys.exit(f"нет {MAPPING} — сначала tools/build_migration.py")
-    return json.loads(MAPPING.read_text(encoding="utf-8"))
+    if not MANIFEST.exists():
+        sys.exit(f"нет {MANIFEST} — сначала tools/refresh_manifest.py")
+    data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    # У манифеста плоский список файлов; проверке нужен тот же вид, что и у
+    # старого mapping.json.
+    return {
+        "repo": data.get("repo", "QuantumArt/storage"),
+        "release_tag": data.get("release", "v1"),
+        "count": data["count"],
+        "total_bytes": data["total_bytes"],
+        "files": [{"name": f["name"], "size": f["size"], "sha256": f["sha256"],
+                   "url": f.get("url", "")} for f in data["files"]],
+    }
 
 
 def sha256(path: Path) -> str:
@@ -158,13 +172,24 @@ def main() -> int:
     ap.add_argument("--live", action="store_true")
     ap.add_argument("--token", default=os.environ.get("GH_TOKEN", ""),
                     help="для --release; по умолчанию проверка анонимная")
+    ap.add_argument("--scope", default="", choices=("downloads", "quantumart"),
+                    help="сузить проверку до одного проекта (по умолчанию всё)")
     args = ap.parse_args()
     if not (args.local or args.release or args.live):
         args.local = args.release = args.live = True
 
     m = load()
+    if args.scope:
+        sub = ROOT / "manifest" / f"mapping-{args.scope}.json"
+        if sub.exists():
+            names = {f["name"] for f in json.loads(
+                sub.read_text(encoding="utf-8"))["files"]}
+            m["files"] = [f for f in m["files"] if f["name"] in names]
+            m["count"] = len(m["files"])
+            m["total_bytes"] = sum(f["size"] for f in m["files"])
     print(f"манифест: {m['count']} файлов, {m['total_bytes'] / 1e9:.2f} ГБ, "
-          f"релиз {m['repo']}@{m['release_tag']}")
+          f"релиз {m['repo']}@{m['release_tag']}"
+          + (f", scope {args.scope}" if args.scope else " (весь состав)"))
 
     bad: list[str] = []
     if args.local:
