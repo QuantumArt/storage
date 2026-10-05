@@ -31,13 +31,21 @@ server {
 }
 
 server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    http2 on;
+    # Старый стиль http2, а не директива `http2 on;`: такая директива есть
+    # только начиная с nginx 1.25, а на этом VPS версия старее, и nginx
+    # падает с `unknown directive "http2"`. Формат тот же, что у соседних
+    # доменов на сервере (izida, kuma, nuget.qsupport.ru).
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name storage.quantumart.ru;
 
     ssl_certificate     /etc/letsencrypt/live/storage.quantumart.ru/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/storage.quantumart.ru/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 1d;
 
     # Файлы крупные (максимум 184 МБ), поэтому клиентский таймаут по умолчанию
     # 60 с на медленных каналах даёт обрыв. Снимаем кеш на уровне nginx:
