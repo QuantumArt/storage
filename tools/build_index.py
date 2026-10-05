@@ -37,6 +37,21 @@ def main() -> None:
     files = sorted(manifest["files"], key=lambda f: f["name"])
     total = sum(f["size"] for f in files)
 
+    # Список ассетов для nginx. Без него любой запрос /downloads/<что угодно>
+    # получал бы 302 на несуществующий ассет, и пользователь видел бы страницу
+    # 404 от GitHub вместо внятного ответа от своего хранилища. Имя, которого
+    # нет в релизе, должно отдавать 404 здесь.
+    base = "https://github.com/QuantumArt/storage/releases/download/v1/"
+    lines = [
+        "# Сгенерировано tools/build_index.py из manifest/manifest.json.",
+        "# Не редактировать: при следующей сборке правки пропадут.",
+        "map $asset $release_url {",
+        '    default "";',
+    ]
+    lines += [f'    "{f["name"]}" "{base}{f["name"]}";' for f in files]
+    lines.append("}")
+    Path("assets.map").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
     rows = "\n".join(
         f'      <tr><td><a href="{BASE}{html.escape(f["name"])}">{html.escape(f["name"])}</a></td>'
         f'<td class="n">{f["size"] / 1e6:.2f} МБ</td>'
@@ -83,7 +98,8 @@ def main() -> None:
 </html>
 """
     Path("index.html").write_text(doc, encoding="utf-8")
-    print(f"index.html: {len(files)} файлов, {total / 1e9:.2f} ГБ")
+    print(f"index.html: {len(files)} файлов, {total / 1e9:.2f} ГБ; "
+          f"assets.map: {len(files)} имён")
 
 
 if __name__ == "__main__":

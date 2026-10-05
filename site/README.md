@@ -9,7 +9,7 @@
 ```
 браузер → https://storage.quantumart.ru/downloads/<файл>
         → nginx на VPS (:443)
-        → контейнер storage-web на 127.0.0.1:3022
+        → контейнер storage-web на 127.0.0.1:3023
         → 302 на https://github.com/QuantumArt/storage/releases/download/v1/<файл>
         → GitHub отдаёт байты
 ```
@@ -27,7 +27,7 @@
 | `Dockerfile` | Двухстадийная сборка: генерация индекса из манифеста → nginx |
 | `site/nginx/default.conf` | Внутриконтейнерный конфиг: 302-редиректы, 404, healthcheck |
 | `site/nginx/storage.quantumart.ru` | Хостовый server block: TLS + reverse proxy |
-| `site/docker-compose.production.yml` | Контейнер `storage-web`, порт `127.0.0.1:3022` |
+| `site/docker-compose.production.yml` | Контейнер `storage-web`, порт `127.0.0.1:3023` |
 | `site/deploy.sh` | Деплой: pull → build → restart → smoke-test |
 | `tools/fetch_origin.py` | Скачать бинарники с оригинала, посчитать sha256, манифест |
 | `tools/build_index.py` | Сгенерировать страницу со списком файлов |
@@ -52,7 +52,7 @@ python3 tools/build_migration.py --downloads-dir ~/Projects/downloads
 # 4. Собрать и запустить контейнер локально
 docker compose -f site/docker-compose.production.yml build
 docker compose -f site/docker-compose.production.yml up -d
-curl -I http://127.0.0.1:3022/downloads/QP8.zip     # 302 на GitHub
+curl -I http://127.0.0.1:3023/downloads/QP8.zip     # 302 на GitHub
 ```
 
 Сервис можно гонять локально целиком: редирект формируется без обращения к

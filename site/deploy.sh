@@ -31,7 +31,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 COMPOSE_FILE="$SCRIPT_DIR/docker-compose.production.yml"
 DOMAIN="storage.quantumart.ru"
-PORT=3022
+PORT=3023
 CONTAINER="storage-web"
 
 print_status() { echo "✅ $1"; }
@@ -117,6 +117,7 @@ docker logs "$WEB_CONTAINER" --tail 30
 echo ""
 echo "🌐 Step 4: HTTP smoke test..."
 echo "  Loopback (Docker direct):"
+# Порт 3023, а не 3022: 3022 занят контейнером nuget-baget.
 for path in / /healthz; do
     code=$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:$PORT$path")
     echo "    $path → HTTP $code"
@@ -159,6 +160,51 @@ for path in / /downloads/QP8.zip; do
     fi
 done
 print_status "HTTP smoke test done"
+
+echo ""
+echo "📦 Step 5: Сквозная проверка скачиванием..."
+# Код ответа на / ничего не доказывает: страница индекса отдаётся даже когда ни
+# один файл не отдаётся. Единственная проверка, которая имеет значение, —
+# скачать файл по всей цепочке (наш домен → 302 → GitHub → байты) и сверить
+# sha256 с манифестом. Именно так на проекте nuget не заметили сбой, при
+# котором / отдавал 200, healthcheck был green, а файлы не открывались.
+MANIFEST="$SCRIPT_DIR/../manifest/manifest.json"
+if [ ! -f "$MANIFEST" ]; then
+    echo "  ⚠️  нет $MANIFEST — сверять не с чем, пропускаю"
+elif ! curl -s -o /dev/null --max-time 10 "https://$DOMAIN/" ; then
+    echo "  ⚠️  $DOMAIN не отвечает — вероятно, DNS ещё не переключён. Пропускаю."
+else
+    # Берём самый маленький pdf: быстро, и на нём сразу видно битый файл.
+    SAMPLE=$(python3 -c "
+import json
+d = json.load(open('$MANIFEST', encoding='utf-8'))
+c = [f for f in d['files'] if f['name'].endswith('.pdf')]
+c.sort(key=lambda f: f['size'])
+print(f"{c[0]['name']} {c[0]['size']} {c[0]['sha256']}" if c else '')" 2>/dev/null)
+    if [ -z "$SAMPLE" ]; then
+        echo "  ⚠️  в манифесте нет pdf для проверки"
+    else
+        set -- $SAMPLE
+        NAME=$1; SIZE=$2; SHA=$3
+        echo "  Пробую $NAME ($(( SIZE / 1024 )) КБ)…"
+        TMPF=$(mktemp)
+        code=$(curl -sL --max-time 300 -o "$TMPF" -w '%{http_code}' "https://$DOMAIN/downloads/$NAME")
+        got_size=$(wc -c < "$TMPF" | tr -d ' ')
+        if command -v sha256sum >/dev/null 2>&1; then
+            got_sha=$(sha256sum "$TMPF" | cut -d' ' -f1)
+        else
+            got_sha=$(shasum -a 256 "$TMPF" | cut -d' ' -f1)
+        fi
+        rm -f "$TMPF"
+        echo "    код $code, размер $got_size (ожидался $SIZE)"
+        echo "    sha256 ${got_sha:0:16}… (ожидался ${SHA:0:16}…)"
+        if [ "$got_size" != "$SIZE" ] || [ "$got_sha" != "$SHA" ]; then
+            print_error "Сквозная проверка не сошлась: файл не доходит до пользователя целым"
+        fi
+        print_status "Файл скачан по всей цепочке и совпал с манифестом"
+    fi
+fi
+
 
 echo ""
 echo "🎉 Deploy complete!"

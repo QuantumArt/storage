@@ -23,7 +23,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "manifest" / "manifest.json"
@@ -110,12 +110,15 @@ def build(downloads_dir: Path | None) -> dict:
 
     rows = []
     for f in manifest["files"]:
-        # Манифест после --normalize уже хранит ASCII-имя в name и оригинал
-        # в original_name; до нормализации name ещё с кириллицей. Оба случая
-        # должны давать одинаковый результат.
-        original = f.get("original_name", f["name"])
+        # Старый URL берём из манифеста как есть, а не собираем из имени:
+        # одна ссылка на оригинале содержит двойной слеш
+        # (…/downloads//QP7_Active_Directory.pdf), и пересборка из имени его
+        # потеряла бы. Коллеге нужна точная строка для замены.
+        # Манифест после --normalize хранит ASCII-имя в name и оригинал
+        # в original_name; до нормализации name ещё с кириллицей.
+        old = f["url"]
+        original = f.get("original_name") or unquote(old.rsplit("/", 1)[-1])
         name = RENAMES.get(original, original)
-        old = OLD_BASE + original
         new = NEW_BASE + name
         rows.append({
             "name": name,

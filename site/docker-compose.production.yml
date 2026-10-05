@@ -1,3 +1,13 @@
+# Имя проекта compose — обязательно задано явно.
+#
+# Без него compose берёт имя из basename каталога с compose-файлом. Здесь
+# каталог `site/`, и у проектов downloads и nuget каталог ТОЖЕ `site/` — все
+# три назывались бы `site`. Само по себе это даёт безобидное
+# `WARN Found orphan containers (downloads-web) for this project`, но опасно
+# в действии: `docker compose down --remove-orphans` в ~/storage/site снёс бы
+# ещё и боевые контейнеры соседей. Найдено и проверено на проекте nuget.
+name: storage
+
 services:
   web:
     build:
@@ -10,11 +20,21 @@ services:
     restart: unless-stopped
     # Контейнер слушает только loopback хоста. Наружу торчит исключительно
     # хостовый nginx (:443) — это его TLS и его rate limiting.
+    #
+    # Порт 3023, а не 3022: 3022 уже занят контейнером `nuget-baget`
+    # (nuget.qsupport.ru). Заняты на момент 2026-10-05: 3001, 3010, 3020,
+    # 3021, 3022, 5000, 7700, 8090, 9117. Перед первым запуском проверь
+    # `docker ps`. Номер порта должен совпадать в трёх местах: здесь, в
+    # deploy.sh (переменная PORT) и в nginx/storage.quantumart.ru.
     ports:
-      - "127.0.0.1:3022:80"
+      - "127.0.0.1:3023:80"
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://localhost/healthz"]
+      # 127.0.0.1, а не localhost: localhost резолвится в ::1, а nginx внутри
+      # контейнера слушает только IPv4. Healthcheck на localhost стабильно
+      # падал, и контейнер уходил в unhealthy при живом и работающем сайте —
+      # ровно тот случай, который пришлось чинить на проекте downloads.
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1/healthz"]
       interval: 30s
       timeout: 5s
-      retries: 3
       start_period: 5s
+      retries: 3

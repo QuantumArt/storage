@@ -99,7 +99,7 @@
       "name": "QP7_OnScreen.pdf",
       "size": 139383,
       "sha256": "7f55e1e257baa34793a2aa90bd698b3c12ecd66a8fd5e5ac8bae4a47ce188d55",
-      "status": "cached"
+      "status": "downloaded"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP7_Security_Model.pdf",
@@ -141,35 +141,35 @@
       "name": "QP8.ProductCatalog.Pg.zip",
       "size": 175734048,
       "sha256": "8458b216f48b29ffd048281e0092924bc76624ff756acdda5aefb9e74cd827a3",
-      "status": "downloaded"
+      "status": "cached"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP8.ProductCatalog.zip",
       "name": "QP8.ProductCatalog.zip",
       "size": 183900055,
-      "sha256": "cad9f71c3968fb7134f475a4d6afeace4807d09fa7f24fd31b76dba756158eb3",
-      "status": "cached"
+      "sha256": "cf9291807f066aab6b5af60b2d858d2e7ffca07acef042c19a407d1fb389fd98",
+      "status": "downloaded"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP8.Widgets.Pg.zip",
       "name": "QP8.Widgets.Pg.zip",
       "size": 95676970,
-      "sha256": "18eece8a53a5a29becccb852c4c3cf4ca82b030ee0c547df4d7d3850ae2dd9dd",
-      "status": "cached"
+      "sha256": "6467161319e79fdeaa1996e37c14b2c62c20d42671773335569a5db54566e4a9",
+      "status": "downloaded"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP8.Widgets.zip",
       "name": "QP8.Widgets.zip",
       "size": 96006994,
       "sha256": "cdda81191ef9e4b45f9428917cc2a21b8ad6e57bc6e2b2f413846f3180c2b4a7",
-      "status": "downloaded"
+      "status": "cached"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP8.zip",
       "name": "QP8.zip",
       "size": 171085860,
-      "sha256": "62e00f23edc32ff35b58891ddb826a7fddc4c6b51faa4421ebcc5384e86b2f53",
-      "status": "cached"
+      "sha256": "e051adc6944fd449bb1fc37a3c0fd487631ee1a4214e2286363c17a6346fe017",
+      "status": "downloaded"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP8_CMS_Postgres_Pro.pdf",
@@ -215,10 +215,11 @@
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/QP_Setup_7.9.7.0..zip",
-      "name": "QP_Setup_7.9.7.0..zip",
+      "name": "QP_Setup_7.9.7.0.zip",
       "size": 35011056,
       "sha256": "bce8fd198e81f55fed997ddd5d7eb45eacdc29849c579733e9f98b5502bd3660",
-      "status": "cached"
+      "status": "cached",
+      "original_name": "QP_Setup_7.9.7.0..zip"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/Quantumart.zip",
@@ -253,7 +254,7 @@
       "name": "demo_qp.zip",
       "size": 16286730,
       "sha256": "ab5f0778608ba6bf8ddc76b18d49cbfa538313c9312054d6f39ae7256fced615",
-      "status": "downloaded"
+      "status": "cached"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/demosite_rus.tar.gz",
@@ -513,7 +514,7 @@
       "name": "qp8-product-catalog-linux.tar.gz",
       "size": 175142529,
       "sha256": "5fb5738e84480c4d192fabe5ee28dc44d442a4ca5dd22c69acd1484612b68d6b",
-      "status": "downloaded"
+      "status": "cached"
     },
     {
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-product-catalog-manifests.tar.gz",

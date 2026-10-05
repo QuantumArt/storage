@@ -32,18 +32,28 @@ ROOT = Path(__file__).resolve().parent.parent
 URLS = ROOT / "manifest" / "source-urls.txt"
 FILES = ROOT / "files"
 MANIFEST = ROOT / "manifest" / "manifest.json"
+REFERENCE = ROOT / "manifest" / "reference-sha256.txt"
 
 RETRIES = 8
 CHUNK = 1 << 20
 CHUNK_BYTES = 8 << 20   # размер куска при скачивании
 CHUNK_TRIES = 20        # попыток на один кусок, прежде чем сдаться на файл
 
-# Единственный файл на оригинале с не-ASCII именем: кириллическая «с» (U+0441)
-# вместо латинской c. На диске хранится в ASCII — иначе имя приходится
-# перцент-энкодить в каждой ссылке. Оригинальное имя сохраняется в манифесте
-# как original_name. Маппинг общий с tools/build_migration.py.
+# Два имени, которые нельзя сохранить как есть.
+#
+# 1. Кириллическая «с» (U+0441) вместо латинской c. На диске хранится в ASCII —
+#    иначе имя приходится перцент-энкодить в каждой ссылке.
+# 2. Двойная точка в QP_Setup_7.9.7.0..zip. GitHub нормализует путь при загрузке
+#    ассета: имя с `..` превращается в `QP_Setup_7.9.7.0.zip` — проверено и
+#    созданием релиза, и перезаливом. Сохранить исходное имя нельзя, поэтому
+#    приводим к тому виду, который GitHub примет: иначе сайт отдал бы 302 на
+#    несуществующий ассет, и ссылка была бы битой при формально верном имени.
+#
+# Маппинг общий с tools/build_migration.py. Оригинальные имена сохраняются в
+# манифесте полем original_name.
 RENAMES = {
     "qp8-pg-functional-сharacteristics.pdf": "qp8-pg-functional-characteristics.pdf",
+    "QP_Setup_7.9.7.0..zip": "QP_Setup_7.9.7.0.zip",
 }
 
 
@@ -82,7 +92,36 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def fetch(url: str, force: bool) -> dict:
+def load_reference() -> dict[str, str]:
+    """Эталонные хеши из независимого скачивания (см. manifest/reference-sha256.txt).
+
+    Без них сверка «файл против манифеста» бесполезна: манифест вычислен из
+    того же скачивания, поэтому битый файл даёт битый же хеш и всегда «совпадает».
+    Эталон получен другим кодом на другой машине — только он отличает «скачалось
+    целое» от «скачалось и повредилось по дороге».
+    """
+    if not REFERENCE.exists():
+        return {}
+    out: dict[str, str] = {}
+    for line in REFERENCE.read_text(encoding="utf-8").splitlines():
+        if line.startswith("#") or "  " not in line:
+            continue
+        digest, name = line.split("  ", 1)
+        out[name.strip().split("  #")[0].strip()] = digest.strip()
+    return out
+
+
+def check_reference(name: str, path: Path, reference: dict[str, str]) -> str | None:
+    want = reference.get(name)
+    if not want:
+        return None
+    got = sha256(path)
+    if got != want:
+        return f"sha256 не совпал с эталоном: эталон {want[:16]}, получено {got[:16]}"
+    return None
+
+
+def fetch(url: str, force: bool, reference: dict[str, str]) -> dict:
     original = target_name(url)
     name = RENAMES.get(original, original)
     dest = FILES / name
@@ -95,11 +134,16 @@ def fetch(url: str, force: bool) -> dict:
     if dest.exists() and not force:
         have = dest.stat().st_size
         if have == want:
-            rec = {"url": url, "name": name, "size": have, "sha256": sha256(dest),
-                   "status": "cached"}
-            if name != original:
-                rec["original_name"] = original
-            return rec
+            bad = check_reference(name, dest, reference)
+            if bad is None:
+                rec = {"url": url, "name": name, "size": have, "sha256": sha256(dest),
+                       "status": "cached"}
+                if name != original:
+                    rec["original_name"] = original
+                return rec
+            # Размер совпал, содержимое нет: так выглядит файл, побитый при
+            # скачивании. Молча пропускать его нельзя — перекачиваем.
+            print(f"  ⚠️  {name}: {bad} — перекачиваю", flush=True)
         dest.unlink()
 
     tmp = dest.with_suffix(dest.suffix + ".part")
@@ -118,6 +162,11 @@ def fetch(url: str, force: bool) -> dict:
             have = 0
         if have == want:
             tmp.replace(dest)
+            bad = check_reference(name, dest, reference)
+            if bad is not None:
+                dest.unlink()
+                return {"url": url, "name": name, "size": want, "sha256": "",
+                        "status": "failed", "error": bad}
             rec = {"url": url, "name": name, "size": dest.stat().st_size,
                    "sha256": sha256(dest), "status": "downloaded"}
             if name != original:
@@ -219,8 +268,11 @@ def main() -> int:
 
     results: list[dict] = []
     done = 0
+    reference = load_reference()
+    if reference:
+        print(f"эталонных хешей загружено: {len(reference)}", flush=True)
     with cf.ThreadPoolExecutor(max_workers=args.jobs) as ex:
-        for r in ex.map(lambda u: fetch(u, args.force), urls):
+        for r in ex.map(lambda u: fetch(u, args.force, reference), urls):
             results.append(r)
             done += 1
             print(f"[{done:3}/{len(urls)}] {r['status']:>10}  "

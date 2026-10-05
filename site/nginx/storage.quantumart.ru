@@ -1,6 +1,9 @@
 # Хостовый server block для storage.quantumart.ru.
 #
 # Ставится на VPS timeweb:
+# Порт контейнера 3023 (3022 занят nuget-baget). Номер порта должен
+# совпадать в этом файле, в docker-compose.production.yml и в deploy.sh.
+#
 #   sudo cp nginx/storage.quantumart.ru /etc/nginx/sites-available/storage.quantumart.ru
 #   sudo ln -s /etc/nginx/sites-available/storage.quantumart.ru \
 #            /etc/nginx/sites-enabled/storage.quantumart.ru
@@ -45,7 +48,7 @@ server {
 
     # Двоичные файлы. Пользователь видит наш домен, дальше — 302 на GitHub.
     location /downloads/ {
-        proxy_pass http://127.0.0.1:3022;
+        proxy_pass http://127.0.0.1:3023;
         proxy_set_header Host              $host;
         proxy_set_header X-Real-IP         $remote_addr;
         proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
@@ -53,7 +56,7 @@ server {
     }
 
     location / {
-        proxy_pass http://127.0.0.1:3022;
+        proxy_pass http://127.0.0.1:3023;
         proxy_set_header Host              $host;
         proxy_set_header X-Real-IP         $remote_addr;
         proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;

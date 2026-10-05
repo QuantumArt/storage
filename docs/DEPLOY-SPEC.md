@@ -12,8 +12,8 @@ Runbook для этого проекта. Общая методика (стру�
 ```
 браузер → storage.quantumart.ru/downloads/QP8.zip
             → хостовый nginx (:443, TLS)          ~/storage/site/nginx/storage.quantumart.ru
-            → proxy_pass 127.0.0.1:3022
-            → контейнер storage-web               Dockerfile + site/nginx/default.conf
+            → proxy_pass 127.0.0.1:3023
+            → контейнер storage-web (3023)        Dockerfile + site/nginx/default.conf
             → 302 Location: https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip
             → GitHub: 302 → objects.githubusercontent.com → байты
 ```
@@ -22,7 +22,7 @@ Runbook для этого проекта. Общая методика (стру�
 хранилища (`tools/build_index.py` генерирует её из манифеста на стадии сборки).
 Всё остальное — редиректы.
 
-Контейнер слушает только `127.0.0.1:3022`. Наружу торчит исключительно
+Контейнер слушает только `127.0.0.1:3023`. Наружу торчит исключительно
 хостовый nginx.
 
 ## 2. Где лежат байты и почему именно так
@@ -96,13 +96,19 @@ curl -sI https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip | he
 
 ```bash
 docker ps --format '{{.Names}}\t{{.Ports}}'
-ss -ltnp | grep 3022
+ss -ltnp | grep 3023
 dig +short storage.quantumart.ru A
 ```
 
-`3022` — следующий свободный после `3021` (downloads). Занятые порты на этом
-VPS меняются, поэтому проверять обязательно: занятый порт проявится как
-«сайт не открывается у соседа».
+`3023` — следующий свободный после `3022`, который занят контейнером
+`nuget-baget` (проект nuget, `nuget.qsupport.ru`). Заняты на момент
+2026-10-05: **3001, 3010, 3020, 3021, 3022, 5000, 7700, 8090, 9117**.
+
+Порт указан в трёх местах, и они должны совпадать:
+`site/docker-compose.production.yml`, `site/deploy.sh` (переменная `PORT`) и
+`site/nginx/storage.quantumart.ru` (`proxy_pass`). Занятый порт проявится не
+сразу: контейнер поднимется, но хостовой nginx будет проксировать в чужие
+контейнеры.
 
 ### Шаг 1. TLS-сертификат — ДО переключения DNS
 
@@ -123,19 +129,18 @@ sudo certbot certificates   # домен в списке?
 
 ### Шаг 2. Забрать код
 
+Репозиторий **публичный** — клон работает анонимно, токен не нужен:
+
 ```bash
+git clone https://github.com/QuantumArt/storage.git ~/storage
 cd ~/storage
-git init                      # только если каталог уже создан вручную
-git remote add origin https://github.com/QuantumArt/storage.git
-set -a && . .credentials.env && set +a
-GH_HELPER='!f() { echo username=x-access-token; echo password="$GH_TOKEN"; }; f'
-GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-  git -c credential.helper="$GH_HELPER" fetch origin main
-git checkout -B main origin/main
+git log --oneline        # убедись, что коммиты есть
 ```
 
-**Клонировать «поверх» нельзя** — в каталоге уже лежат `.credentials.env` и
-`.secrets/`, клон их затёр бы. Инициализация на месте, как показано выше.
+`.credentials.env` на VPS нужен **только** для `git pull` внутри `deploy.sh`:
+глобальный `credential.helper=store` на этом сервере перебивает анонимный
+доступ. Если залить токен нечем — закомментируй шаг `git pull` в `deploy.sh`:
+без сети к GitHub работает всё остальное, код меняется редко.
 
 ### Шаг 3. Поднять контейнер
 
@@ -165,8 +170,8 @@ A-запись `storage.quantumart.ru` → IP этого VPS. Только те�
 
 ```bash
 # локально, минуя DNS
-curl -I http://127.0.0.1:3022/
-curl -I http://127.0.0.1:3022/downloads/QP8.zip     # 302 + Location
+curl -I http://127.0.0.1:3023/
+curl -I http://127.0.0.1:3023/downloads/QP8.zip     # 302 + Location
 
 # через хостовый nginx, до переключения DNS
 curl -I --resolve storage.quantumart.ru:443:127.0.0.1 https://storage.quantumart.ru/
@@ -174,6 +179,22 @@ curl -I --resolve storage.quantumart.ru:443:127.0.0.1 https://storage.quantumart
 # после переключения
 curl -sI https://storage.quantumart.ru/downloads/QP8.zip | head -3
 ```
+
+**И главное — проверка скачиванием, а не кодом ответа.** Страница `/` отдаётся
+даже тогда, когда ни один файл не отдаётся, поэтому «200 на `/`» не доказывает
+ничего. Единственная проверка, которая имеет значение: скачать файл по всей
+цепочке и сверить хеш.
+
+```bash
+cd ~/storage/site && ./deploy.sh          # шаг 5 делает это сам
+```
+
+Шаг 5 `deploy.sh` берёт самый маленький pdf из манифеста, скачивает его через
+`https://storage.quantumart.ru/downloads/<файл>`, проходит по всей цепочке
+(302 → GitHub → байты) и сверяет размер и sha256. Не сошлось — деплой падает.
+
+На проекте nuget сбой с похожим признаком (`/v3/index.json` отдаёт 200,
+healthcheck green, а файлы не открываются) был пойман именно так.
 
 ## 5. Грабли, специфичные для этого проекта
 
@@ -239,9 +260,32 @@ sudo nginx -t && sudo systemctl reload nginx
 от чего на сервере не зависит. Ассеты при откате остаются: откатывается только
 раздача.
 
-## 8. Чек-лист
+## 8. Грабли, унаследованные от соседних проектов
 
-- [ ] Порт 3022 свободен (`docker ps`, `ss -ltnp`)
+Этот сервер обслуживает несколько проектов, и часть ошибок уже оплачена на
+соседях. Здесь они собраны, чтобы не повторять.
+
+| Грабля | Где bitten | Что сделано здесь |
+|---|---|---|
+| **Порт занят соседом.** 3022 уже занят `nuget-baget` | этот проект изначально планировался на 3022 | Порт **3023**. Проверять `docker ps` перед первым запуском; номер должен совпадать в compose, `deploy.sh` и `nginx/storage.quantumart.ru` |
+| **Коллизия имён compose-проектов.** Имя берётся из basename каталога, а каталог у всех `site/` | `nuget`: `down --remove-orphans` в `~/nuget/site` снёс бы боевой `downloads-web` | В compose прописано `name: storage` |
+| **Healthcheck на `localhost` вместо `127.0.0.1`** | `downloads`: контейнер уходил в `unhealthy` при живом сайте | `127.0.0.1` и в compose, и в `Dockerfile` |
+| **Обрезка архива на таймауте.** 20+ МБ рвётся и оставляет невалидный файл, который выглядит скачанным | `nuget`: `SeleniumExtension 1.0.8–1.0.13` | Тот же класс ловушки пойман здесь трижды, см. §5. Лечится кусочной закачкой + проверкой формата |
+| **`xargs -I{}` не масштабируется** | `nuget`: на 629 аргументах `command line cannot be assembled, too long` | Скрипты на цикле, без `xargs -I` |
+| **Код ответа на `/` ничего не доказывает** | `nuget`: `/v3/index.json` отдавал 200, healthcheck был green, а файлы не открывались | `deploy.sh`, шаг 5: скачивание файла со сверкой sha256 |
+| **Инструмент проверки, который нельзя заставить ошибиться** | `downloads`: скрипт рапортовал «полное совпадение», не заходя на URL без завершающего слэша | У каждой проверки есть обязательный негативный тест, см. `docs/VERIFICATION.md` §5 |
+| **Секреты в коммите** | общий риск | `.credentials.env` и `.secrets/` в `.gitignore`, проверка в чек-листе |
+
+**Читать перед деплоем:** `anisimovs/nuget:site/VALIDATION.md` (приёмка и
+журнал грабель) и `anisimovs/downloads:docs/DEPLOY-SPEC.md` §3 (авторизация
+git на этом VPS).
+
+## 9. Чек-лист
+
+- [ ] Порт 3023 свободен (`docker ps`, `ss -ltnp`)
+- [ ] `name: storage` в compose: без него проект называется как каталог
+      (`site`) и совпадает с downloads и nuget — `down --remove-orphans`
+      в этой папке снёс бы чужие боевые контейнеры
 - [ ] `.credentials.env` и `.secrets/` в `.gitignore`; `git status --short` чист
 - [ ] Секретов в истории нет: `git log -p --all | grep -c 'github_pat_\|GH_TOKEN=gith'` → 0
 - [ ] Репозиторий публичный: `curl -s ... /repos/QuantumArt/storage | grep '"visibility"'`
