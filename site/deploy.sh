@@ -71,10 +71,16 @@ fi
 
 GH_HELPER='!f() { echo username=x-access-token; echo password="$GH_TOKEN"; }; f'
 
-# Первый деплой идёт в ещё пустой репозиторий: ветки upstream нет, и обычный
-# `git pull` падает с "no tracking information". Не прерываем деплой из-за этого —
-# кода на диске уже достаточно, чтобы собрать образ.
-if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
+# Токена может не быть: репозиторий публичный, клон анонимный, а общий
+# /root/.git-credentials на этом сервере отдаёт чужой токен и даёт 403.
+# Тогда pull пропускаем с предупреждением — собирать образ из того, что уже
+# лежит на диске, безопаснее, чем ронять деплой. Код меняется редко, и
+# следующий деплой подхватит новое при первом же появлении токена.
+if [ -z "${GH_TOKEN:-}" ]; then
+    echo "⚠️  GH_TOKEN не задан — шаг 'git pull' пропущен."
+    echo "   Для приватного репозитория положи токен в ~/storage/.credentials.env"
+    echo "   (формат: GH_TOKEN=...), либо закомментируй этот шаг."
+elif ! git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
     PRE_PULL_HASH=$(git rev-parse HEAD)
     GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
         git -c credential.helper="$GH_HELPER" pull
@@ -85,6 +91,9 @@ if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
         print_status "Получено обновление: $PRE_PULL_HASH → $POST_PULL_HASH"
     fi
 else
+    # Первый деплой идёт в ещё пустой репозиторий: ветки upstream нет, и обычный
+    # `git pull` падает с "no tracking information". Не прерываем деплой из-за
+    # этого — кода на диске уже достаточно, чтобы собрать образ.
     echo "ℹ️  No upstream branch configured — собираю из текущего состояния рабочей копии"
 fi
 

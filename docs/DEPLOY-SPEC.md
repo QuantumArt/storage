@@ -133,14 +133,40 @@ sudo certbot certificates   # домен в списке?
 
 ```bash
 git clone https://github.com/QuantumArt/storage.git ~/storage
-cd ~/storage
-git log --oneline        # убедись, что коммиты есть
 ```
 
-`.credentials.env` на VPS нужен **только** для `git pull` внутри `deploy.sh`:
-глобальный `credential.helper=store` на этом сервере перебивает анонимный
-доступ. Если залить токен нечем — закомментируй шаг `git pull` в `deploy.sh`:
-без сети к GitHub работает всё остальное, код меняется редко.
+**Если каталог `~/storage` уже существует** (а он обычно существует — ради
+`.secrets/cloudflare.ini`), клон падает с
+`destination path already exists and is not an empty directory`. Клонировать
+поверх нельзя: клон затёр бы секреты. Сначала посмотри, что внутри:
+
+```bash
+ls -la ~/storage
+```
+
+Если там только `.secrets/` (и, возможно, `.credentials.env`) — инициализируй на
+месте, git их не тронет:
+
+```bash
+cd ~/storage
+git init
+git remote add origin https://github.com/QuantumArt/storage.git
+GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
+  git -c credential.helper= fetch origin main
+git checkout -B main origin/main
+git log --oneline        # убедись, что коммиты есть, а .secrets на месте
+```
+
+`GIT_CONFIG_GLOBAL=/dev/null` обязателен: глобальный
+`credential.helper=store` на этом сервере отдаёт чужой токен и даёт 403 даже на
+публичный репозиторий.
+
+Если в каталоге нет ничего ценного — удали его и клонируй как показано выше.
+
+`.credentials.env` на VPS нужен **только** для `git pull` внутри `deploy.sh`.
+Без токена скрипт теперь не падает, а печатает предупреждение и собирает образ
+из того, что уже лежит на диске: код меняется редко, и деплой от этого не
+страдает.
 
 ### Шаг 3. Поднять контейнер
 
