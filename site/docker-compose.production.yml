@@ -5,7 +5,7 @@ services:
       # а в образе они нужны для генерации индекса.
       context: ..
       dockerfile: Dockerfile
-    image: anisimovs/storage:latest
+    image: quantumart/storage:latest   # имя образа в Docker обязательно строчное
     container_name: storage-web
     restart: unless-stopped
     # Контейнер слушает только loopback хоста. Наружу торчит исключительно

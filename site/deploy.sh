@@ -52,7 +52,7 @@ echo "📥 Step 1: Pulling latest changes..."
 #
 # Глобальный конфиг (/root/.gitconfig) содержит credential.helper=store, и его
 # ~/.git-credentials отдаёт токен, созданный под другой репозиторий — на
-# anisimovs/storage GitHub отвечает 403. Helper'ы опрашиваются по очереди, и
+# QuantumArt/storage GitHub отвечает 403. Helper'ы опрашиваются по очереди, и
 # первый ответивший выигрывает, поэтому глобальный store перебивает локальный.
 #
 # Обходим это тремя средствами:
@@ -137,7 +137,7 @@ if [ "$code" != "302" ]; then
     print_error "Expected 302 for a file, got $code"
 fi
 case "$loc" in
-    *github.com/anisimovs/storage/releases/download/v1/QP8.zip) ;;
+    *github.com/QuantumArt/storage/releases/download/v1/QP8.zip) ;;
     *) print_error "Redirect target is wrong: $loc" ;;
 esac
 
@@ -170,4 +170,4 @@ echo "   Рестарт:        docker compose -f $COMPOSE_FILE restart web"
 echo "   Reload nginx:   sudo systemctl reload nginx"
 echo ""
 echo "⚠️  Ассеты лежат в GitHub Release. Проверить, что релиз на месте:"
-echo "   gh release view v1 --repo anisimovs/storage"
+echo "   gh release view v1 --repo QuantumArt/storage"

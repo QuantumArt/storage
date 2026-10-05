@@ -37,7 +37,7 @@ from fetch_origin import RENAMES  # noqa: E402
 
 OLD_BASE = "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/"
 NEW_BASE = "https://storage.quantumart.ru/downloads/"
-REPO = "anisimovs/storage"
+REPO = "QuantumArt/storage"
 RELEASE_TAG = "v1"
 
 # Допустимые символы в имени ассета. Ровно эта же регулярка стоит во
@@ -246,7 +246,7 @@ def write_spec(m: dict) -> None:
         "",
         "```",
         "браузер → storage.quantumart.ru/downloads/QP8.zip → 302 →",
-        "github.com/anisimovs/storage/releases/download/v1/QP8.zip → 302 →",
+        "github.com/QuantumArt/storage/releases/download/v1/QP8.zip → 302 →",
         "objects.githubusercontent.com (файл)",
         "```",
         "",

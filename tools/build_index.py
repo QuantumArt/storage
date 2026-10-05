@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 
 BASE = "https://storage.quantumart.ru/downloads/"
-RELEASE = "https://github.com/anisimovs/storage/releases/tag/v1"
+RELEASE = "https://github.com/QuantumArt/storage/releases/tag/v1"
 
 TYPES = {
     ".zip": "zip-архив",
@@ -70,7 +70,7 @@ def main() -> None:
   <h1>Хранилище файлов QP</h1>
   <p class="note">Файлов: {len(files)}, суммарно {total / 1e9:.2f} ГБ.
      Ссылки раздаются редиректом на ассеты GitHub; полный состав с полными
-     sha256 — в <a href="https://github.com/anisimovs/storage">репозитории</a>.</p>
+     sha256 — в <a href="https://github.com/QuantumArt/storage">репозитории</a>.</p>
   <table>
     <thead><tr><th>Файл</th><th>Размер</th><th>Тип</th><th>sha256</th></tr></thead>
     <tbody>

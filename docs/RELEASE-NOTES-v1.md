@@ -17,7 +17,7 @@
 
 ```bash
 # Один файл
-curl -LO https://github.com/anisimovs/storage/releases/download/v1/QP8.zip
+curl -LO https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip
 
 # Через наш домен (302-редирект на ассет этого релиза)
 curl -LO https://storage.quantumart.ru/downloads/QP8.zip
@@ -28,7 +28,7 @@ curl -LO https://storage.quantumart.ru/downloads/QP8.zip
 sha256 каждого файла — в `manifest/manifest.json`. Сверить:
 
 ```bash
-curl -sL https://github.com/anisimovs/storage/releases/download/v1/QP8.zip | shasum -a 256
+curl -sL https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip | shasum -a 256
 python3 -c "import json;d=json.load(open('manifest/manifest.json'));print([f['sha256'] for f in d['files'] if f['name']=='QP8.zip'][0])"
 ```
 

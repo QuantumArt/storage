@@ -39,7 +39,7 @@ from build_migration import ASSET_SAFE  # noqa: E402  — тот же regex, ч�
 
 CHUNK = 1 << 20
 
-RELEASE_URL = "https://github.com/anisimovs/storage/releases/download/v1/{name}"
+RELEASE_URL = "https://github.com/QuantumArt/storage/releases/download/v1/{name}"
 LIVE_URL = "https://storage.quantumart.ru/downloads/{name}"
 
 

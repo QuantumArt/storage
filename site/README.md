@@ -10,7 +10,7 @@
 браузер → https://storage.quantumart.ru/downloads/<файл>
         → nginx на VPS (:443)
         → контейнер storage-web на 127.0.0.1:3022
-        → 302 на https://github.com/anisimovs/storage/releases/download/v1/<файл>
+        → 302 на https://github.com/QuantumArt/storage/releases/download/v1/<файл>
         → GitHub отдаёт байты
 ```
 
@@ -67,8 +67,10 @@ GitHub, скачивать байты для проверки не нужно.
 - **Файл с кириллицей в имени.** `qp8-pg-functional-сharacteristics.pdf` →
   `qp8-pg-functional-characteristics.pdf`. Оригинальное имя — в поле
   `original_name` манифеста.
-- **Токен открывает только `anisimovs/storage`.** На `downloads` и `quantumart`
-  отдаёт 404, поэтому спека для коллеги лежит в этом репозитории.
+- **Спека для коллеги лежит здесь, а не в `downloads`.** Локальные операции
+ идут через `gh` (OAuth-токен аккаунта, scope `repo`); на VPS для `git pull`
+ нужен собственный fine-grained PAT в `~/storage/.credentials.env` — общий
+ `/root/.git-credentials` на том сервере отдаёт чужой токен и даёт 403.
 - **Репозиторий обязан быть публичным.** Ассеты приватного репозитория
   анонимно не отдаются.
 - **Только 302, никогда 301.** 301 закешируется браузером навсегда.

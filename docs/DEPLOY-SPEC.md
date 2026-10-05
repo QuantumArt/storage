@@ -14,7 +14,7 @@ Runbook для этого проекта. Общая методика (стру�
             → хостовый nginx (:443, TLS)          ~/storage/site/nginx/storage.quantumart.ru
             → proxy_pass 127.0.0.1:3022
             → контейнер storage-web               Dockerfile + site/nginx/default.conf
-            → 302 Location: https://github.com/anisimovs/storage/releases/download/v1/QP8.zip
+            → 302 Location: https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip
             → GitHub: 302 → objects.githubusercontent.com → байты
 ```
 
@@ -27,7 +27,7 @@ Runbook для этого проекта. Общая методика (стру�
 
 ## 2. Где лежат байты и почему именно так
 
-Файлы — ассеты GitHub Release [`anisimovs/storage`](https://github.com/anisimovs/storage)
+Файлы — ассеты GitHub Release [`QuantumArt/storage`](https://github.com/QuantumArt/storage)
 тега `v1`. Причины, по которым отброшены другие варианты:
 
 | Вариант | Почему не выбран |
@@ -39,7 +39,7 @@ Runbook для этого проекта. Общая методика (стру�
 
 **Следствие приватности:** ассеты приватного репозитория анонимно не отдаются
 (web-маршрут отдаёт 404 или редирект на логин, API требует токен). Поэтому
-`anisimovs/storage` **публичный** — это условие работоспособности, а не
+`QuantumArt/storage` **публичный** — это условие работоспособности, а не
 оформление. Перед публикацией убедиться, что в индексе нет секретов:
 `git ls-files | grep -E 'credentials|secrets'` должен вернуть пусто.
 
@@ -55,31 +55,34 @@ Runbook для этого проекта. Общая методика (стру�
 cd ~/Projects/storage
 set -a && . .credentials.env && set +a
 
-git remote add origin https://github.com/anisimovs/storage.git
+git remote add origin https://github.com/QuantumArt/storage.git
 git push -u origin main
 
 # Видимость — публичная (условие анонимной раздачи ассетов)
 curl -sS -X PATCH -H "Authorization: Bearer $GH_TOKEN" \
      -H "Accept: application/vnd.github+json" \
      -d '{"visibility":"public"}' \
-     https://api.github.com/repos/anisimovs/storage | python3 -c \
+     https://api.github.com/repos/QuantumArt/storage | python3 -c \
      'import json,sys; print("visibility:", json.load(sys.stdin)["visibility"])'
 
 # Релиз с ассетами (~1.37 ГБ)
 gh release create v1 files/* \
-    --repo anisimovs/storage \
+    --repo QuantumArt/storage \
     --title "Файлы QP — снимок оригинального хранилища" \
     --notes-file docs/RELEASE-NOTES-v1.md
 ```
 
-**Токен — fine-grained, открывает только `anisimovs/storage`.** На `downloads`
-и `quantumart` он отдаёт 404, поэтому спека для коллеги лежит здесь, а не в
-репозитории downloads.
+**Токены.** Локально операции идут через `gh` (OAuth-токен аккаунта `anisimovs`,
+scope `repo`) — он открывает и `QuantumArt/storage`. На VPS нужен свой
+fine-grained PAT в `~/storage/.credentials.env`, потому что глобальный
+`/root/.git-credentials` на том сервере отдаёт токен чужого репозитория
+и даёт 403 (см. §3 аналога в `anisimovs/downloads`). Спека для коллеги лежит
+здесь: отдельного токена на репозиторий `downloads` у нас нет.
 
 **Проверка, что ассеты отдаются анонимно** (без токена!):
 
 ```bash
-curl -sI https://github.com/anisimovs/storage/releases/download/v1/QP8.zip | head -3
+curl -sI https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip | head -3
 # 302 → https://objects.githubusercontent.com/...   это и есть успех
 ```
 
@@ -123,7 +126,7 @@ sudo certbot certificates   # домен в списке?
 ```bash
 cd ~/storage
 git init                      # только если каталог уже создан вручную
-git remote add origin https://github.com/anisimovs/storage.git
+git remote add origin https://github.com/QuantumArt/storage.git
 set -a && . .credentials.env && set +a
 GH_HELPER='!f() { echo username=x-access-token; echo password="$GH_TOKEN"; }; f'
 GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
@@ -213,7 +216,7 @@ python3 tools/fetch_origin.py
 python3 tools/build_migration.py --downloads-dir ~/Projects/downloads
 
 # 4. Новый релиз: старый v1 остаётся как есть, навсегда
-gh release create v2 files/* --repo anisimovs/storage --title "…" --notes-file …
+gh release create v2 files/* --repo QuantumArt/storage --title "…" --notes-file …
 
 # 5. Обновить REPO/RELEASE_TAG в site/nginx/default.conf и tools/build_migration.py,
 #    закоммитить, запушить, задеплоить
@@ -241,9 +244,9 @@ sudo nginx -t && sudo systemctl reload nginx
 - [ ] Порт 3022 свободен (`docker ps`, `ss -ltnp`)
 - [ ] `.credentials.env` и `.secrets/` в `.gitignore`; `git status --short` чист
 - [ ] Секретов в истории нет: `git log -p --all | grep -c 'github_pat_\|GH_TOKEN=gith'` → 0
-- [ ] Репозиторий публичный: `curl -s ... /repos/anisimovs/storage | grep '"visibility"'`
-- [ ] Релиз `v1` создан, 98 ассетов: `gh release view v1 --repo anisimovs/storage`
-- [ ] Ассет отдаётся анонимно: `curl -sI https://github.com/anisimovs/storage/releases/download/v1/QP8.zip`
+- [ ] Репозиторий публичный: `curl -s ... /repos/QuantumArt/storage | grep '"visibility"'`
+- [ ] Релиз `v1` создан, 98 ассетов: `gh release view v1 --repo QuantumArt/storage`
+- [ ] Ассет отдаётся анонимно: `curl -sI https://github.com/QuantumArt/storage/releases/download/v1/QP8.zip`
 - [ ] Сертификат выпущен, домен в `certbot certificates`
 - [ ] `nginx -t` проходит **до** reload
 - [ ] DNS переключён **после** сертификата и nginx
