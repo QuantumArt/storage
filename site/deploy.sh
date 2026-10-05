@@ -71,30 +71,56 @@ fi
 
 GH_HELPER='!f() { echo username=x-access-token; echo password="$GH_TOKEN"; }; f'
 
-# Токена может не быть: репозиторий публичный, клон анонимный, а общий
-# /root/.git-credentials на этом сервере отдаёт чужой токен и даёт 403.
-# Тогда pull пропускаем с предупреждением — собирать образ из того, что уже
-# лежит на диске, безопаснее, чем ронять деплой. Код меняется редко, и
-# следующий деплой подхватит новое при первом же появлении токена.
-if [ -z "${GH_TOKEN:-}" ]; then
-    echo "⚠️  GH_TOKEN не задан — шаг 'git pull' пропущен."
-    echo "   Для приватного репозитория положи токен в ~/storage/.credentials.env"
-    echo "   (формат: GH_TOKEN=...), либо закомментируй этот шаг."
-elif ! git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
-    PRE_PULL_HASH=$(git rev-parse HEAD)
-    GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-        git -c credential.helper="$GH_HELPER" pull
-    POST_PULL_HASH=$(git rev-parse HEAD)
+# Репозиторий публичный, поэтому токен для fetch не нужен: GitHub отдаёт
+# публичные репозитории, не запрашивая авторизацию. Проверено — fetch проходит
+# даже с подложенным чужим токеном в ~/.git-credentials, глобальный
+# credential.helper=store при этом не опрашивается.
+#
+# Раньше шаг пропускался целиком при отсутствии токена, и это была ошибка:
+# «нет токена» ≠ «нечем тянуть», из-за неё деплой собирал устаревший образ и
+# требовал ручного `git merge` перед собой.
+#
+# Нейтрализация глобального конфига оставлена по двум причинам:
+#   1. чужой токен из общего /root/.git-credentials не должен уходить на GitHub
+#      ни при каких условиях; если репозиторий станет приватным, получим
+#      внятную ошибку авторизации, а не 403 от чужого токена;
+#   2. поведение деплоя не зависит от того, что ещё лежит в общих файлах
+#      на сервере.
+#
+# Ни одна из попыток не роняет деплой: если сеть недоступна или рабочая копия
+# изменена, собираем образ из того, что уже лежит на диске. Код меняется
+# редко, а упавший деплой хуже отставшего.
+PRE_PULL_HASH=$(git rev-parse HEAD 2>/dev/null || echo "unknown")
+
+fetch_and_merge() {
+    if [ -n "${GH_TOKEN:-}" ]; then
+        GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
+            git -c credential.helper="$GH_HELPER" pull --ff-only
+    else
+        # Публичный репозиторий: анонимный fetch. Пустой credential.helper
+        # гарантирует, что чужие креды не подставятся, даже если где-то выше по
+        # конфигурации снова появится store.
+        GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
+            git -c credential.helper= fetch origin main \
+        && git merge --ff-only origin/main
+    fi
+}
+
+if fetch_and_merge; then
+    POST_PULL_HASH=$(git rev-parse HEAD 2>/dev/null || echo "unknown")
     if [ "$PRE_PULL_HASH" = "$POST_PULL_HASH" ]; then
         echo "ℹ️  Изменений нет — продолжаю пересборку (инкрементальный деплой)"
     else
         print_status "Получено обновление: $PRE_PULL_HASH → $POST_PULL_HASH"
     fi
 else
-    # Первый деплой идёт в ещё пустой репозиторий: ветки upstream нет, и обычный
-    # `git pull` падает с "no tracking information". Не прерываем деплой из-за
-    # этого — кода на диске уже достаточно, чтобы собрать образ.
-    echo "ℹ️  No upstream branch configured — собираю из текущего состояния рабочей копии"
+    echo "⚠️  Не удалось обновить код с GitHub — деплой продолжится из текущей"
+    echo "   рабочей копии ($PRE_PULL_HASH)."
+    echo "   Причины: нет сети, рабочая копия изменена, или репозиторий стал"
+    echo "   приватным и нужен токен в ~/storage/.credentials.env (GH_TOKEN=…)."
+    echo "   Проверить вручную:"
+    echo "     GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \\"
+    echo "       git -c credential.helper= fetch origin main && git merge --ff-only origin/main"
 fi
 
 echo ""
