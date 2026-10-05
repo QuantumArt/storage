@@ -1,0 +1,181 @@
+{
+  "scope": "quantumart",
+  "repo": "QuantumArt/storage",
+  "release_tag": "v1",
+  "old_base": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/",
+  "new_base": "https://storage.quantumart.ru/downloads/",
+  "count": 15,
+  "total_bytes": 18874710,
+  "renames": {
+    "qp8-pg-functional-сharacteristics.pdf": "qp8-pg-functional-characteristics.pdf",
+    "QP_Setup_7.9.7.0..zip": "QP_Setup_7.9.7.0.zip"
+  },
+  "urls_in_docs_without_manifest_entry": [],
+  "files": [
+    {
+      "name": "01_politika_obrabotka_pdn_202311_finalnaya_redakciya.pdf",
+      "original_name": "01_politika_obrabotka_pdn_202311_finalnaya_redakciya.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation/01_politika_obrabotka_pdn_202311_finalnaya_redakciya.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/01_politika_obrabotka_pdn_202311_finalnaya_redakciya.pdf",
+      "size": 4452088,
+      "sha256": "04946804ec6506c618804ebec2d6194ef0e95002c33ec579533bf903f4bf5ad1",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "DPC-full.pdf",
+      "original_name": "DPC-full.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/DPC-full.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/DPC-full.pdf",
+      "size": 1572735,
+      "sha256": "82acdd188251a5ce96af1dd4040de8df8868bfafa5223d9ac20df256c4c768b1",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "INN_20230609.pdf",
+      "original_name": "INN_20230609.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation/INN_20230609.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/INN_20230609.pdf",
+      "size": 269503,
+      "sha256": "5604c37383801d53d54d7baaeade3a0d842861acf6d4803be506cda59e2dddda",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "MRP_svidetelstvo_20000629.pdf",
+      "original_name": "MRP_svidetelstvo_20000629.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation/MRP_svidetelstvo_20000629.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/MRP_svidetelstvo_20000629.pdf",
+      "size": 522273,
+      "sha256": "744323031512d32671eb0ba51689d80f5fcc5280ec600bf0b6d716f6302f879b",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "OGRN_20020726.pdf",
+      "original_name": "OGRN_20020726.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation/OGRN_20020726.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/OGRN_20020726.pdf",
+      "size": 258802,
+      "sha256": "cc8af07f0ec0eabc6fd1ed9bbbe3ecee2f18881340e5d26baa44dbc8103cdbd8",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "Quantum_Art_2021.pdf",
+      "original_name": "Quantum_Art_2021.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation/Quantum_Art_2021.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/Quantum_Art_2021.pdf",
+      "size": 2256261,
+      "sha256": "445065b3077d448b01ebaa4d02ac7e2a49ea0860319ba51ce893a1493cd5fce7",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "Recommended_activities_2018-2025.pdf",
+      "original_name": "Recommended_activities_2018-2025.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/documents/Recommended_activities_2018-2025.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/Recommended_activities_2018-2025.pdf",
+      "size": 1152098,
+      "sha256": "552e9baa465ed151339b1db1d1cb83d5f2bdb28fc5dadca6f00c471d13f46f06",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "Summary_statement_2018-2025.pdf",
+      "original_name": "Summary_statement_2018-2025.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/documents/Summary_statement_2018-2025.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/Summary_statement_2018-2025.pdf",
+      "size": 5027708,
+      "sha256": "f9fbd0fe52a13095904702e2ad326c54396b2afe70ae1ad790eec96773df48ec",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "case_vtb.docx",
+      "original_name": "case_vtb.docx",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/case_vtb.docx",
+      "new_url": "https://storage.quantumart.ru/downloads/case_vtb.docx",
+      "size": 21687,
+      "sha256": "78f10b219c9e53d7998d35f5662f1a6e743fb84b625575b9e55be79b9b181f46",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "cert_se17_rdy-15016.pdf",
+      "original_name": "cert_se17_rdy-15016.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/documents/cert_se17_rdy-15016.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/cert_se17_rdy-15016.pdf",
+      "size": 411897,
+      "sha256": "9cfbf14b8cb1caff79ecc03d4f39e174c61f36dd141f507247393c7374992f91",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "certificate_bitrix.pdf",
+      "original_name": "certificate_bitrix.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/certificate_bitrix.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/certificate_bitrix.pdf",
+      "size": 194857,
+      "sha256": "c7b42c00f0c49d0e1f038ec70168963e907d8ac237cf9017af0d1f28119fcac6",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "presentation_CMS_QP8.pdf",
+      "original_name": "presentation_CMS_QP8.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation_CMS_QP8.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/presentation_CMS_QP8.pdf",
+      "size": 808564,
+      "sha256": "d8311d29cf9d69a0431fd337d623aa86bbc246943d8a64f5106302470a1ddab8",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "presentation_QA_IOT.pdf",
+      "original_name": "presentation_QA_IOT.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation_QA_IOT.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/presentation_QA_IOT.pdf",
+      "size": 816041,
+      "sha256": "08d420baacfced1cd707ed2028854f1adcc7cb507ac06195052421d32aa397e4",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "presentation_QA_OUTSOURCING.pdf",
+      "original_name": "presentation_QA_OUTSOURCING.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation_QA_OUTSOURCING.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/presentation_QA_OUTSOURCING.pdf",
+      "size": 857263,
+      "sha256": "02892eee265d4cc4f3c06577a5b36b64b753f679872909d7987e5a4c70311cf5",
+      "pages": [],
+      "source_files": []
+    },
+    {
+      "name": "privacy_policy_Quantumart_2022.pdf",
+      "original_name": "privacy_policy_Quantumart_2022.pdf",
+      "renamed": false,
+      "old_url": "https://storage.qp.qsupport.ru/qa_official_site/images/presentation/privacy_policy_Quantumart_2022.pdf",
+      "new_url": "https://storage.quantumart.ru/downloads/privacy_policy_Quantumart_2022.pdf",
+      "size": 252933,
+      "sha256": "fe76e0b41714dcf55b80a77cfa0f4588976789bd57b25f0198e42572b041669a",
+      "pages": [],
+      "source_files": []
+    }
+  ]
+}

@@ -42,9 +42,18 @@ def main() -> None:
     # 404 от GitHub вместо внятного ответа от своего хранилища. Имя, которого
     # нет в релизе, должно отдавать 404 здесь.
     base = "https://github.com/QuantumArt/storage/releases/download/v1/"
+    # Размер хеш-таблицы карты обязан расти вместе с числом имён: на
+    # дефолтных 64 nginx падает с `could not build map_hash` уже на 113
+    # записях, причём контейнер уходит в рестарт с exit 1. Считаем от
+    # количества файлов, чтобы это не пришлось вспоминать при следующем
+    # добавлении.
+    bucket = 64
+    while bucket < len(files) * 4:
+        bucket *= 2
     lines = [
         "# Сгенерировано tools/build_index.py из manifest/manifest.json.",
         "# Не редактировать: при следующей сборке правки пропадут.",
+        f"map_hash_bucket_size {bucket};   # для {len(files)} имён",
         "map $asset $release_url {",
         '    default "";',
     ]

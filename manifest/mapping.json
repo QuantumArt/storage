@@ -1,4 +1,5 @@
 {
+  "scope": "downloads",
   "repo": "QuantumArt/storage",
   "release_tag": "v1",
   "old_base": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/",
@@ -19,15 +20,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/API_ASP.NET_ENG.pdf",
       "size": 224648,
       "sha256": "0a6888dd72fc8747ee90f591abed2e6c6bbfa31c3d595ba935ae0d082baa44bb",
-      "pages": [
-        "/QP79",
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json",
-        "site/src/pages/QP79.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Components.zip",
@@ -37,13 +31,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Components.zip",
       "size": 136964,
       "sha256": "74e724111c62bf76211b794e4957d3b76054a4793d6f5589ee871c5c4a851228",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Database.Pg.zip",
@@ -53,15 +42,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Database.Pg.zip",
       "size": 1540251,
       "sha256": "358de857796333e82d4cec6ab975a8b692e6a4c472654be6e8f85e70e73feb59",
-      "pages": [
-        "/",
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Database.zip",
@@ -71,15 +53,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Database.zip",
       "size": 1870189,
       "sha256": "2c9c37c0308674cf09843a05d38b433ad4ca70ed42d1d236e17c9cd3c1c7addc",
-      "pages": [
-        "/",
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Developer_Guide_ASP.NET_ENG.pdf",
@@ -89,15 +64,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Developer_Guide_ASP.NET_ENG.pdf",
       "size": 474244,
       "sha256": "cf2cff4ea4b74a56cb5d730048577e79ab3b7ea61381390901c8e32dd6a2e638",
-      "pages": [
-        "/QP79",
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json",
-        "site/src/pages/QP79.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Editor_Guide_RUS.pdf",
@@ -107,15 +75,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Editor_Guide_RUS.pdf",
       "size": 2819686,
       "sha256": "4400539fd8a1105700aa3e1af88176dba352724cea141f7a11496f599cde1e02",
-      "pages": [
-        "/QP79",
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json",
-        "site/src/pages/QP79.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Help_to_QP7_Backend_Explorer_ENG.pdf",
@@ -125,13 +86,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Help_to_QP7_Backend_Explorer_ENG.pdf",
       "size": 781651,
       "sha256": "5afff2734ba00696bea65b38879f920dd7e3253ff5db705ad8530df5a97680c2",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Help_to_QP7_Backend_Explorer_RUS.pdf",
@@ -141,13 +97,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Help_to_QP7_Backend_Explorer_RUS.pdf",
       "size": 852587,
       "sha256": "d7ab59fdc9d241e9fae4117e520f20553b50f489404ecb6859ae0ef096245818",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Multisite_Object_Loading.pdf",
@@ -157,13 +108,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Multisite_Object_Loading.pdf",
       "size": 180379,
       "sha256": "dd683e8956f8705b12e652eb97de9f3e11d813c4687515edb906402ecfd0f073",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QA_LicenceInfo.zip",
@@ -173,13 +119,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QA_LicenceInfo.zip",
       "size": 119561,
       "sha256": "be6e711e9923eef9572e7806a7c47b8d0a9ba1193e64ddc8337136fe733fcdf8",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP7_Active_Directory.pdf",
@@ -189,12 +130,9 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP7_Active_Directory.pdf",
       "size": 122369,
       "sha256": "df23f9561bffc6f97318a183a7415c9062f071870f283fea28ae4466afe30ac6",
-      "pages": [
-        "/archive/"
-      ],
+      "pages": [],
       "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
+        "site/src/data/link-migration.json"
       ]
     },
     {
@@ -205,15 +143,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP7_Installation_Guide_RUS.pdf",
       "size": 972844,
       "sha256": "c8f1f29a6ad34f133b06d0abee70ef04b9abf3846a19bc4dffbdfd08007dc9f4",
-      "pages": [
-        "/QP79",
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json",
-        "site/src/pages/QP79.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP7_Notifications.pdf",
@@ -223,13 +154,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP7_Notifications.pdf",
       "size": 271288,
       "sha256": "82680276450820d423ef2b1c3e07d4c3710450c77dd32674bc7333a6fd54d7cc",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP7_OnScreen.pdf",
@@ -239,13 +165,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP7_OnScreen.pdf",
       "size": 139383,
       "sha256": "7f55e1e257baa34793a2aa90bd698b3c12ecd66a8fd5e5ac8bae4a47ce188d55",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP7_Security_Model.pdf",
@@ -255,13 +176,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP7_Security_Model.pdf",
       "size": 282223,
       "sha256": "64d12c1ac716b0e43fdac71917b0ee17af5e3e841794da048b1cda9f6f4e4099",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP7_Workflow.pdf",
@@ -271,13 +187,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP7_Workflow.pdf",
       "size": 580055,
       "sha256": "46e7fe4008c1042a241a0b16bdbc8cc16673fe0dbf55ae28029b86c4fa4edb96",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.ConsoleDbUpdate.zip",
@@ -287,13 +198,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.ConsoleDbUpdate.zip",
       "size": 21073310,
       "sha256": "ce993d9d2d0f5b7d9e022764b36ff6f1a2e1000ddd3fc76a3d1c1ed0bf52abe5",
-      "pages": [
-        "/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.ProductCatalog.Impact.zip",
@@ -303,13 +209,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.ProductCatalog.Impact.zip",
       "size": 28476035,
       "sha256": "df25dc4ca3c6f8120130408454bb843cb5d0f52a32672427a59a22c4b09eb559",
-      "pages": [
-        "/DPC.Impact/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.Impact/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.ProductCatalog.PdfGenerator.zip",
@@ -319,13 +220,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.ProductCatalog.PdfGenerator.zip",
       "size": 63629896,
       "sha256": "95e435aeab9861a31288c69a0be4451036bd995e2257b8b20f0357aeb263e140",
-      "pages": [
-        "/DPC.PdfGenerator/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.PdfGenerator/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.ProductCatalog.Pg.zip",
@@ -335,13 +231,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.ProductCatalog.Pg.zip",
       "size": 175734048,
       "sha256": "8458b216f48b29ffd048281e0092924bc76624ff756acdda5aefb9e74cd827a3",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.ProductCatalog.zip",
@@ -351,13 +242,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.ProductCatalog.zip",
       "size": 183900055,
       "sha256": "cf9291807f066aab6b5af60b2d858d2e7ffca07acef042c19a407d1fb389fd98",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.Widgets.Pg.zip",
@@ -367,13 +253,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.Widgets.Pg.zip",
       "size": 95676970,
       "sha256": "6467161319e79fdeaa1996e37c14b2c62c20d42671773335569a5db54566e4a9",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.Widgets.zip",
@@ -383,13 +264,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.Widgets.zip",
       "size": 96006994,
       "sha256": "cdda81191ef9e4b45f9428917cc2a21b8ad6e57bc6e2b2f413846f3180c2b4a7",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8.zip",
@@ -399,13 +275,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8.zip",
       "size": 171085860,
       "sha256": "e051adc6944fd449bb1fc37a3c0fd487631ee1a4214e2286363c17a6346fe017",
-      "pages": [
-        "/QP8"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8_CMS_Postgres_Pro.pdf",
@@ -415,13 +286,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8_CMS_Postgres_Pro.pdf",
       "size": 224683,
       "sha256": "1f6c7af60f74812fd0bbf6a35417b3d54d10279fb1d9ad91044007badd8a10bc",
-      "pages": [
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8_PG.zip",
@@ -431,13 +297,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8_PG.zip",
       "size": 34053697,
       "sha256": "4504bf0492f613778e91d288d9293abf5094a717026971339fd77ae9adb871d6",
-      "pages": [
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP8_ProductCatalog_Postgres_Pro.pdf",
@@ -447,13 +308,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP8_ProductCatalog_Postgres_Pro.pdf",
       "size": 222262,
       "sha256": "0c768ea41432b6e611ecffeb7a20b1896f933d5690a03a2818b1a5af41d83a7e",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QPCodeClean.zip",
@@ -463,13 +319,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QPCodeClean.zip",
       "size": 13381,
       "sha256": "df980d86f34c7070cf23d25368cebb12009a2fb97f2735ab1518c39a42b292a5",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QPDatabaseSqlRunner.zip",
@@ -479,13 +330,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QPDatabaseSqlRunner.zip",
       "size": 13176,
       "sha256": "b6d8d1064ce9c2127d513fe9bb8bfce3faedd4202e23f6d87532c64066d455ce",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QPWebService.zip",
@@ -495,13 +341,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/QPWebService.zip",
       "size": 188253,
       "sha256": "66ae41bf5d5ba594317f5b786292ff4e87ff4de73755dd7a6ae6e3173e139af6",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "QP_Setup_7.9.7.0.zip",
@@ -511,12 +352,9 @@
       "new_url": "https://storage.quantumart.ru/downloads/QP_Setup_7.9.7.0.zip",
       "size": 35011056,
       "sha256": "bce8fd198e81f55fed997ddd5d7eb45eacdc29849c579733e9f98b5502bd3660",
-      "pages": [
-        "/QP79"
-      ],
+      "pages": [],
       "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP79.html"
+        "site/src/data/link-migration.json"
       ]
     },
     {
@@ -527,13 +365,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Quantumart.zip",
       "size": 321408,
       "sha256": "7c1d6dca4499a79ee9ef7829aae6054640c2f6246c700938f60c3e00692bb01e",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "Release_Notes_RUS.pdf",
@@ -543,13 +376,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/Release_Notes_RUS.pdf",
       "size": 282285,
       "sha256": "ff5c1557b5d2924396817e5b763643a6ef5b17465e2a4b8bf0afe503176e0891",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "SQL_injection.pdf",
@@ -559,13 +387,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/SQL_injection.pdf",
       "size": 136812,
       "sha256": "1cb15beec7e484327a9b6064297f62ccd8555565dbcf7e9b2391808bf756b546",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "configuration_file.pdf",
@@ -575,13 +398,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/configuration_file.pdf",
       "size": 169104,
       "sha256": "4cf97cbaad12c95b062d6b1e560b92daf1c544e91a138783adc3a74d502c0a16",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "demo_qp.zip",
@@ -591,13 +409,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/demo_qp.zip",
       "size": 16286730,
       "sha256": "ab5f0778608ba6bf8ddc76b18d49cbfa538313c9312054d6f39ae7256fced615",
-      "pages": [
-        "/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "demosite_rus.tar.gz",
@@ -607,13 +420,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/demosite_rus.tar.gz",
       "size": 35056731,
       "sha256": "dd2a581c7c00f782c69d559094d8a6709aa94ffd03b41e578fee404fa94ce5a5",
-      "pages": [
-        "/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "demosite_rus_db.tar.gz",
@@ -623,15 +431,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/demosite_rus_db.tar.gz",
       "size": 1820819,
       "sha256": "824650359560318c37858a5191d1fc775a2d094f0cb2c681f4bd5d79141eea8a",
-      "pages": [
-        "/",
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "functional_char_angular.pdf",
@@ -641,13 +442,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/functional_char_angular.pdf",
       "size": 269385,
       "sha256": "9c843352b597759a3b8b1b6669aa8e6169fe255d3d8fb3b880357eb9e270f88c",
-      "pages": [
-        "/Angular/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Angular/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "functional_char_graphql.pdf",
@@ -657,13 +453,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/functional_char_graphql.pdf",
       "size": 292759,
       "sha256": "8adaf49473b37287bb3fba216698459b3905937a05bb8bd6b630f98eab12420e",
-      "pages": [
-        "/GraphQL/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/GraphQL/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "functional_char_react.pdf",
@@ -673,13 +464,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/functional_char_react.pdf",
       "size": 305296,
       "sha256": "f966c5cd0985dc64e5eec2eaf84d2abf3e56171878514c2554709953ab979dd0",
-      "pages": [
-        "/React/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/React/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "graphql-config.tar",
@@ -689,13 +475,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/graphql-config.tar",
       "size": 8704,
       "sha256": "34f6443a7d957f939a973aa937fa51737b34197850df189f67183985fcc32a6b",
-      "pages": [
-        "/GraphQL/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/GraphQL/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "graphql.tar.gz",
@@ -705,13 +486,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/graphql.tar.gz",
       "size": 4816104,
       "sha256": "52d14d920b3079ded3b1e30f6633c33d9511b7bd4a0457204d4bd03d55894a5f",
-      "pages": [
-        "/GraphQL/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/GraphQL/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "install_angular.pdf",
@@ -721,13 +497,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/install_angular.pdf",
       "size": 1106576,
       "sha256": "4d3af80d1a79f61699ccb653a61c29fcad300a995f8284b2066242c92824c88b",
-      "pages": [
-        "/Angular/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Angular/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "install_graphql.pdf",
@@ -737,13 +508,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/install_graphql.pdf",
       "size": 490453,
       "sha256": "a755573ae416e6d50bd4e1e83fb67450acfbfb1987a24bc8934e495a08e75eeb",
-      "pages": [
-        "/GraphQL/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/GraphQL/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "install_react.pdf",
@@ -753,13 +519,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/install_react.pdf",
       "size": 1136381,
       "sha256": "2927f07b5807a3cd0b5979b6e8e931d0ab7456cc61a5cd39f1680c68f38cfca1",
-      "pages": [
-        "/React/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/React/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "mapping.zip",
@@ -769,13 +530,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/mapping.zip",
       "size": 11889,
       "sha256": "c16ac265b8c7722ab5a3d0d1c826869c9700413b7ef64cfe70d15206fdc9b759",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "process_angular.pdf",
@@ -785,13 +541,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/process_angular.pdf",
       "size": 422663,
       "sha256": "6e07384ba4c3592b87ba91269db2c41277ba16cffeadd73466635d9597f7a290",
-      "pages": [
-        "/Angular/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Angular/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "process_graphql.pdf",
@@ -801,13 +552,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/process_graphql.pdf",
       "size": 411987,
       "sha256": "58969035300b7b35c5250e9cfd05d2d3191c682925287d8a81e784646ce0d701",
-      "pages": [
-        "/GraphQL/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/GraphQL/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "process_react.pdf",
@@ -817,13 +563,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/process_react.pdf",
       "size": 421345,
       "sha256": "290d1261591aa60f65ca821ad2021ee6e4626e74d438eebc52b5a5b3068b81da",
-      "pages": [
-        "/React/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/React/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "publishing.zip",
@@ -833,13 +574,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/publishing.zip",
       "size": 2670875,
       "sha256": "2342a4dee324fc6d54d8b7f3083426db2393daca8b20c4a1500a725822d83de2",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp-search-install-manifests.tar.gz",
@@ -849,13 +585,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp-search-install-manifests.tar.gz",
       "size": 1879,
       "sha256": "5d52f9b63e81ea4708a45893f75ec688cf39c6211a7cd0211f6cd75f5b3758e2",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp-search.tar.gz",
@@ -865,13 +596,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp-search.tar.gz",
       "size": 23905580,
       "sha256": "05b94ba8d7f2d54e75cb2583d857000028148d2f9e6f4c3f740c4f96a8789843",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp.tar.gz",
@@ -881,13 +607,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp.tar.gz",
       "size": 47138758,
       "sha256": "bf87099403f063dc3bcd6d05cfa797d616fcb3e876d93b253c8c6b5e31c8915e",
-      "pages": [
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-admin-man.pdf",
@@ -897,13 +618,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-admin-man.pdf",
       "size": 1514708,
       "sha256": "a960c57806e90a96080f0271e0aa802e2c70cc94bb27bed81fbc0bba59fb629d",
-      "pages": [
-        "/QP8"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dev-man.pdf",
@@ -913,15 +629,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dev-man.pdf",
       "size": 5869479,
       "sha256": "fbe341256ef060d129f7ce544b328ae65f41ba76acd0cf17daa99a1a526540dc",
-      "pages": [
-        "/QP8",
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8.html",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dpc-functional-requirements.pdf",
@@ -931,13 +640,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dpc-functional-requirements.pdf",
       "size": 833756,
       "sha256": "96653a329b2f8e1fbe0626b40985297aeb149a6727a56959072d2096d1fce4be",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dpc-impact-functional-requirements.pdf",
@@ -947,13 +651,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dpc-impact-functional-requirements.pdf",
       "size": 777047,
       "sha256": "60d7fb39e7ea3598be7616d926a0a40923a670731af03e57090d2f595b8f00f9",
-      "pages": [
-        "/DPC.Impact/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.Impact/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dpc-impact-user-man.pdf",
@@ -963,13 +662,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dpc-impact-user-man.pdf",
       "size": 1399834,
       "sha256": "6c56c803d8b6c7af12d2c43833d7487c73865ca17417ff09422034ed9e225812",
-      "pages": [
-        "/DPC.Impact/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.Impact/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dpc-pdf-functional-requirements.pdf",
@@ -979,13 +673,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dpc-pdf-functional-requirements.pdf",
       "size": 781954,
       "sha256": "8428cce388d018181d70507705891e4efed78867f8707eb379d6b0afae79038e",
-      "pages": [
-        "/DPC.PdfGenerator/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.PdfGenerator/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dpc-pdf-user-man.pdf",
@@ -995,13 +684,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dpc-pdf-user-man.pdf",
       "size": 1816301,
       "sha256": "f01767f442e279ddf61952fb686f29eff8d5f85ca0445e48299a130c7bd57b8a",
-      "pages": [
-        "/DPC.PdfGenerator/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.PdfGenerator/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-dpc-user-man.pdf",
@@ -1011,13 +695,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-dpc-user-man.pdf",
       "size": 5808759,
       "sha256": "f8c00b7434815c84e490ca990dcccfb0601db5b2d84342cf7e0288c604000641",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-editor-man.pdf",
@@ -1027,15 +706,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-editor-man.pdf",
       "size": 8144531,
       "sha256": "ce768f0161eab00c0e70f6a199617e80b2445210963fdc20f46c1c1c2afbeb7c",
-      "pages": [
-        "/QP8",
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8.html",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-functional-characteristics.pdf",
@@ -1045,13 +717,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-functional-characteristics.pdf",
       "size": 233660,
       "sha256": "39b03388d6ddd087e9910ebaa82653facd3a9468e6dd54803e16d0580d071656",
-      "pages": [
-        "/QP8"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-graphql-user-man.pdf",
@@ -1061,13 +728,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-graphql-user-man.pdf",
       "size": 1696395,
       "sha256": "5417f4195a7fbc26b67381b387af9cefa4f4f4e426f6f791a8df01c3a79474c1",
-      "pages": [
-        "/GraphQL/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/GraphQL/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-pg-admin-man.pdf",
@@ -1077,13 +739,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-pg-admin-man.pdf",
       "size": 3528042,
       "sha256": "0cc2a37d44b0d910c2ed2301456121e644f7a7d0f665f9fb706368003e481a4d",
-      "pages": [
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-pg-functional-characteristics.pdf",
@@ -1093,12 +750,9 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-pg-functional-characteristics.pdf",
       "size": 303005,
       "sha256": "2a9cfcfea51f3ed4cb1dd85ae33d0787e44e70b58819cbfd41b88a3597cb6727",
-      "pages": [
-        "/QP8_PG"
-      ],
+      "pages": [],
       "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8_PG.html"
+        "site/src/data/link-migration.json"
       ]
     },
     {
@@ -1109,15 +763,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-database.tar.gz",
       "size": 3923284,
       "sha256": "b546e9d37d222428aec897f7fb130a673ef152aeac45d9a80c18a7638aec4dbe",
-      "pages": [
-        "/",
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/index.json",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-demo-manifests.tar.gz",
@@ -1127,13 +774,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-demo-manifests.tar.gz",
       "size": 1375,
       "sha256": "513f59ff1b8edd62d3234b35aca98eb1df822dcf36cd6557f9f2bc0dffa34cf0",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-demo.tar.gz",
@@ -1143,13 +785,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-demo.tar.gz",
       "size": 1987258,
       "sha256": "666b5816f9d51fe7cc153dc8be6f87c0bcb37f1c4ac2051677c1d967e8697f34",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-impact-linux.tar.gz",
@@ -1159,13 +796,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-impact-linux.tar.gz",
       "size": 25082005,
       "sha256": "bbe56f3df574183d5fc1eac96b343c84185ef18c1ee200a6eee63aee15167c23",
-      "pages": [
-        "/DPC.Impact/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.Impact/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-impact-manifests.tar.gz",
@@ -1175,13 +807,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-impact-manifests.tar.gz",
       "size": 1421,
       "sha256": "97ad461706c19641f1e4dc3d6f53f1b2af13405006da67e72381ec5c64d14d68",
-      "pages": [
-        "/DPC.Impact/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.Impact/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-linux.tar.gz",
@@ -1191,13 +818,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-linux.tar.gz",
       "size": 175142529,
       "sha256": "5fb5738e84480c4d192fabe5ee28dc44d442a4ca5dd22c69acd1484612b68d6b",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-manifests.tar.gz",
@@ -1207,13 +829,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-manifests.tar.gz",
       "size": 2631,
       "sha256": "117fd76618e7d4dde46b2df5970a7914129279b5a35e84806b2f38807d9dce4e",
-      "pages": [
-        "/DPC"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-pdf-manifests.tar.gz",
@@ -1223,13 +840,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-pdf-manifests.tar.gz",
       "size": 2515,
       "sha256": "f683342d0ecbdb53ce49df5ba3cb9e81070a92cc289badab26c48ae6e1baf839",
-      "pages": [
-        "/DPC.PdfGenerator/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.PdfGenerator/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-product-catalog-pdf.tar.gz",
@@ -1239,13 +851,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-product-catalog-pdf.tar.gz",
       "size": 59716277,
       "sha256": "695e521647064ef23e575f71694e371f3f0decfdd32118854f83fc815519ae1f",
-      "pages": [
-        "/DPC.PdfGenerator/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/DPC.PdfGenerator/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-admin-user-man.pdf",
@@ -1255,13 +862,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-admin-user-man.pdf",
       "size": 840348,
       "sha256": "cfb1d6912a0e914bcf1bfe8c0fb7ce514fe6ee7159a8edec869b285f729ef319",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-api-developer-man.pdf",
@@ -1271,13 +873,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-api-developer-man.pdf",
       "size": 568310,
       "sha256": "24b9b4a530b91d9fc78782db2ba7f5b4d1ee4358e1a2cd65c0b644ffb8f121db",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-architecture.pdf",
@@ -1287,13 +884,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-architecture.pdf",
       "size": 481925,
       "sha256": "c8e432d775ba032a9f05094e629a254296ae62befea8034f2dd91001d8c0ac16",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-functions.pdf",
@@ -1303,13 +895,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-functions.pdf",
       "size": 850885,
       "sha256": "add69dfc4e9b23876bc1ed9877bad3d58b0ca712f92173b31c5338dac2ab7bc4",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-installation-manual.pdf",
@@ -1319,13 +906,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-installation-manual.pdf",
       "size": 1533159,
       "sha256": "372e5913b1e04addcf769ac7d16db7451f504be53b891f09e0c97d5c026383a9",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-integration-developer-man.pdf",
@@ -1335,13 +917,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-integration-developer-man.pdf",
       "size": 616647,
       "sha256": "8fe097e6658e43e07d81ed1c7cfd580fb51337390f12650f63a9a8b6f2f91c10",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-search-processes.pdf",
@@ -1351,13 +928,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-search-processes.pdf",
       "size": 365161,
       "sha256": "9b31bab78221b47eb78ed4ff0ba28761d208ace8f6417d1eb17370c931c90742",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-widgets-admin-man.pdf",
@@ -1367,13 +939,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-widgets-admin-man.pdf",
       "size": 1639153,
       "sha256": "1524c7db1c8186d429d65c65e2cab050b7bc6d2cc8dcfac63581de82ab4994db",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-widgets-angular-user-man.pdf",
@@ -1383,13 +950,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-widgets-angular-user-man.pdf",
       "size": 1407993,
       "sha256": "e49cf167d8ab39b411d5df9e3e1fca2856e9b72a21b4cef0af3daf61e0fbf62b",
-      "pages": [
-        "/Angular/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Angular/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-widgets-dev-man.pdf",
@@ -1399,13 +961,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-widgets-dev-man.pdf",
       "size": 1140367,
       "sha256": "573f55c0ed13e593ec61a18b26ce1768c5c83d936e39673eb654173320329671",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-widgets-editor-man.pdf",
@@ -1415,13 +972,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-widgets-editor-man.pdf",
       "size": 2639334,
       "sha256": "b1ed52fabbbf412434af0ca567df14522b530b5899ba210650d2d64d0d7dd6d9",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-widgets-functional-requirements.pdf",
@@ -1431,13 +983,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-widgets-functional-requirements.pdf",
       "size": 799315,
       "sha256": "124e447eef5a6e690318d116b9102466f7743ad2684a4c03f420081418b33230",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qp8-widgets-react_user_man.pdf",
@@ -1447,13 +994,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qp8-widgets-react_user_man.pdf",
       "size": 3152783,
       "sha256": "4cc40cf5eea7f1fb03d4d6063c5e1b72de3f4dc9f7b7abde79b7673b560a87db",
-      "pages": [
-        "/React/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/React/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "qpconfig.tar",
@@ -1463,13 +1005,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/qpconfig.tar",
       "size": 19968,
       "sha256": "1c7be8c0f30d736b211faa7a0e8d838de1b6f0a0ee244995481be81d9adf0dac",
-      "pages": [
-        "/QP8_PG"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/QP8_PG.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "source.zip",
@@ -1479,13 +1016,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/source.zip",
       "size": 7332938,
       "sha256": "d6cfe8ffe19822afe6370a8db5321dd2453dc0d06a0afc7c832a13177163d36d",
-      "pages": [
-        "/archive/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/data/archive.json"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "template.zip",
@@ -1495,13 +1027,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/template.zip",
       "size": 1941,
       "sha256": "73f94dcad306a99d4561fd9479ebb2a571182af4d84dc11e3d3291e5228bad48",
-      "pages": [
-        "/search"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/search.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "widget-angular-config.tar",
@@ -1511,13 +1038,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/widget-angular-config.tar",
       "size": 10752,
       "sha256": "beaa7fc1a978849cce2b7ec239d1e2c5267ced1fe54314ddaf51b92c51f749cf",
-      "pages": [
-        "/Angular/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Angular/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "widget-angular.tar.gz",
@@ -1527,13 +1049,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/widget-angular.tar.gz",
       "size": 13092416,
       "sha256": "b14050bcbac437b1c1274c0df5649eed8dcb6cc8cc22fce389a41d7bcee385d6",
-      "pages": [
-        "/Angular/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Angular/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "widget-config.tar",
@@ -1543,13 +1060,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/widget-config.tar",
       "size": 13824,
       "sha256": "5e64f81b2feb8c10f80d3d13ccc334355653e2fbbab701aee67e0c87ac2aaccf",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "widget-react-config.tar",
@@ -1559,13 +1071,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/widget-react-config.tar",
       "size": 14848,
       "sha256": "0d55fdfefd0ca2cb7edc3b508387200f842b371fcaa84e7f27e5fe9698f836a2",
-      "pages": [
-        "/React/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/React/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "widget-react.tar.gz",
@@ -1575,13 +1082,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/widget-react.tar.gz",
       "size": 10171825,
       "sha256": "e8d8e8f0adc6a559d08242b3ddc59809938e54a11c267f00f12d3d76563d55e8",
-      "pages": [
-        "/React/"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/React/index.html"
-      ]
+      "pages": [],
+      "source_files": []
     },
     {
       "name": "widget.tar.gz",
@@ -1591,13 +1093,8 @@
       "new_url": "https://storage.quantumart.ru/downloads/widget.tar.gz",
       "size": 69326703,
       "sha256": "a53ef112a0fdba38401c31580eac079e71373be15cc26794ae249f708b92a2aa",
-      "pages": [
-        "/Widgets"
-      ],
-      "source_files": [
-        "docs/EXTERNAL-LINKS.md",
-        "site/src/pages/Widgets.html"
-      ]
+      "pages": [],
+      "source_files": []
     }
   ]
 }

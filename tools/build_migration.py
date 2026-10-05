@@ -27,9 +27,26 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "manifest" / "manifest.json"
-MAPPING = ROOT / "manifest" / "mapping.json"
-CSV_OUT = ROOT / "manifest" / "migration.csv"
-SPEC = ROOT / "docs" / "LINK-MIGRATION.md"
+# Спеки разные: 98 бинарников обслуживают портал downloads, 15 документов
+# достались из ссылки quantumart.ru. Манифест общий на все 113 файлов, а
+# перечень ссылок и выходные файлы у каждойscope свои.
+SCOPES = {
+    "downloads": {
+        "list": ROOT / "manifest" / "source-urls.txt",
+        "mapping": ROOT / "manifest" / "mapping.json",
+        "csv": ROOT / "manifest" / "migration.csv",
+        "spec": ROOT / "docs" / "LINK-MIGRATION.md",
+    },
+    # Спека для quantumart ещё не написана: ждём обновлённый
+    # EXTERNAL-LINKS.md от коллеги. Пока генерируются только машиночитаемые
+    # артефакты — из них уже можно взять и список файлов, и готовые URL.
+    "quantumart": {
+        "list": ROOT / "manifest" / "source-urls-docs.txt",
+        "mapping": ROOT / "manifest" / "mapping-quantumart.json",
+        "csv": ROOT / "manifest" / "migration-quantumart.csv",
+        "spec": None,
+    },
+}
 
 # Единый источник правды по переименованиям — загрузчик, который качает файлы.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -50,20 +67,17 @@ PAGES_RE = re.compile(r"^\s+- на: (.+)$")
 
 
 def parse_external_links(path: Path) -> dict[str, list[str]]:
-    """URL → список страниц, где встречается. Блок выбран по заголовку раздела.
+    """URL → список страниц, где встречается.
 
-    Формат в документе — две строки на запись: сама ссылка, затем «- на: …».
+    Разбирается весь документ, а не только раздел нужного домена: коллега
+    переименовал секцию (`storage.qp.qsupport.ru` → `storage.quantumart.ru`),
+    и привязка к заголовку перестала работать. Страницы («- на: …») есть
+    только в старом варианте документа, в новом их нет — это нормально,
+    страницы берутся из самих исходников через scan_sources().
     """
     out: dict[str, list[str]] = {}
-    inside = False
     pending: str | None = None
     for line in path.read_text(encoding="utf-8").splitlines():
-        if line.startswith("### "):
-            inside = line.startswith("### `storage.qp.qsupport.ru`")
-            pending = None
-            continue
-        if not inside:
-            continue
         m = URL_RE.match(line)
         if m:
             pending = m.group(1)
@@ -71,10 +85,8 @@ def parse_external_links(path: Path) -> dict[str, list[str]]:
             continue
         m = PAGES_RE.match(line)
         if m and pending:
-            out[pending] = [p.strip(" `") for p in m.group(1).split(", ")]
-    if not out:
-        raise SystemExit(f"не нашлось ни одной ссылки storage.qp в {path}")
-    return out
+            out[pending] = [pg.strip(" `") for pg in m.group(1).split(", ")]
+    return out   # пусто — нормально: документ мог быть уже переведён
 
 
 def scan_sources(downloads_dir: Path) -> dict[str, list[str]]:
@@ -96,9 +108,26 @@ def scan_sources(downloads_dir: Path) -> dict[str, list[str]]:
     return hits
 
 
-def build(downloads_dir: Path | None) -> dict:
+def load_scope_files(scope: str) -> set[str]:
+    lst = SCOPES[scope]["list"]
+    if not lst.exists():
+        raise SystemExit(f"нет списка {lst}")
+    out = set()
+    for line in lst.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        # Имена применяются те же, что и при загрузке: иначе фильтр сравнил бы
+        # ASCII-имена из манифеста с необработанными именами из списка и молча
+        # выбросил бы все переименованные файлы (98 превратились в 96).
+        original = unquote(line.rsplit("/", 1)[-1])
+        out.add(RENAMES.get(original, original))
+    return out
+
+
+def build(scope: str, downloads_dir: Path | None) -> dict:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    by_name = {f["name"]: f for f in manifest["files"]}
+    scope_names = load_scope_files(scope)
 
     pages: dict[str, list[str]] = {}
     src_hits: dict[str, list[str]] = {}
@@ -110,6 +139,8 @@ def build(downloads_dir: Path | None) -> dict:
 
     rows = []
     for f in manifest["files"]:
+        if f["name"] not in scope_names:
+            continue
         # Старый URL берём из манифеста как есть, а не собираем из имени:
         # одна ссылка на оригинале содержит двойной слеш
         # (…/downloads//QP7_Active_Directory.pdf), и пересборка из имени его
@@ -135,8 +166,10 @@ def build(downloads_dir: Path | None) -> dict:
         })
     rows.sort(key=lambda r: r["name"])
 
-    unmapped = [r["old_url"] for r in rows if r["old_url"] not in pages]
+    unmapped = ([r["old_url"] for r in rows if r["old_url"] not in pages]
+                if pages else [])
     return {
+        "scope": scope,
         "repo": REPO,
         "release_tag": RELEASE_TAG,
         "old_base": OLD_BASE,
@@ -149,7 +182,7 @@ def build(downloads_dir: Path | None) -> dict:
     }
 
 
-def write_spec(m: dict) -> None:
+def write_spec(m: dict, out: Path) -> None:
     renamed = [r for r in m["files"] if r["renamed"]]
     all_pages = sorted({p for r in m["files"] for p in r["pages"]})
     all_files = sorted({f for r in m["files"] for f in r["source_files"]})
@@ -278,32 +311,43 @@ def write_spec(m: dict) -> None:
         pages = ", ".join(f"`{p}`" for p in r["pages"]) or "—"
         lines.append(f"| `{r['name']}` | {r['size'] / 1e6:.2f} МБ | {pages} |")
 
-    SPEC.parent.mkdir(parents=True, exist_ok=True)
-    SPEC.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--downloads-dir", default="",
                     help="путь к репозиторию downloads (для списка файлов-исходников)")
+    ap.add_argument("--scope", default="downloads", choices=sorted(SCOPES),
+                    help="для какого проекта строится перенос ссылок")
     args = ap.parse_args()
 
     if not MANIFEST.exists():
         raise SystemExit(f"нет {MANIFEST} — сначала tools/fetch_origin.py")
 
-    m = build(Path(args.downloads_dir).expanduser() if args.downloads_dir else None)
+    cfg = SCOPES[args.scope]
+    mapping, csv_out, spec = cfg["mapping"], cfg["csv"], cfg["spec"]
 
-    MAPPING.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding="utf-8")
-    with CSV_OUT.open("w", encoding="utf-8", newline="") as fh:
+    m = build(args.scope,
+              Path(args.downloads_dir).expanduser() if args.downloads_dir else None)
+
+    mapping.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding="utf-8")
+    with csv_out.open("w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["old_url", "new_url"])
         for r in m["files"]:
             w.writerow([r["old_url"], r["new_url"]])
-    write_spec(m)
+    if spec is not None:
+        write_spec(m, spec)
 
-    print(f"файлов в маппинге: {m['count']}, суммарно {m['total_bytes'] / 1e9:.2f} GB")
-    print(f"записано: {MAPPING.relative_to(ROOT)}, {CSV_OUT.relative_to(ROOT)}, "
-          f"{SPEC.relative_to(ROOT)}")
+    print(f"scope: {args.scope} | файлов в маппинге: {m['count']}, "
+          f"суммарно {m['total_bytes'] / 1e9:.2f} GB")
+    print(f"записано: {mapping.relative_to(ROOT)}, {csv_out.relative_to(ROOT)}")
+    if spec is not None:
+        print(f"спека:    {spec.relative_to(ROOT)}")
+    else:
+        print("спека:    не создаётся для этого scope (ждём обновлённый документ)")
     if m["urls_in_docs_without_manifest_entry"]:
         print("ВНИМАНИЕ: в EXTERNAL-LINKS.md есть ссылки, которых нет в манифесте:")
         for u in m["urls_in_docs_without_manifest_entry"]:

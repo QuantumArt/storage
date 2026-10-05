@@ -30,6 +30,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 URLS = ROOT / "manifest" / "source-urls.txt"
+URLS_DOCS = ROOT / "manifest" / "source-urls-docs.txt"
 FILES = ROOT / "files"
 MANIFEST = ROOT / "manifest" / "manifest.json"
 REFERENCE = ROOT / "manifest" / "reference-sha256.txt"
@@ -57,11 +58,12 @@ RENAMES = {
 }
 
 
-def read_urls() -> list[str]:
-    if not URLS.exists():
-        sys.exit(f"нет списка ссылок: {URLS}")
+def read_urls(path: Path | None = None) -> list[str]:
+    path = path or URLS
+    if not path.exists():
+        sys.exit(f"нет списка ссылок: {path}")
     seen: dict[str, None] = {}
-    for line in URLS.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if line and not line.startswith("#"):
             seen.setdefault(line, None)
@@ -240,6 +242,8 @@ def main() -> int:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--normalize", action="store_true",
                     help="только применить переименования к файлам и манифесту")
+    ap.add_argument("--list", default="",
+                    help="файл со списком URL (по умолчанию source-urls.txt)")
     ap.add_argument("--out", default="files",
                     help="каталог для скачивания (по умолчанию files/)")
     args = ap.parse_args()
@@ -262,7 +266,7 @@ def main() -> int:
     if shutil.which("curl") is None:
         sys.exit("curl не найден")
 
-    urls = read_urls()
+    urls = read_urls(Path(args.list).expanduser() if args.list else URLS)
     FILES.mkdir(parents=True, exist_ok=True)
     print(f"файлов в списке: {len(urls)}, каталог: {FILES}", flush=True)
 
