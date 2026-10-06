@@ -34,11 +34,16 @@ services:
     # бы при каждом `up -d --force-recreate`, а deploy.sh пересоздаёт контейнер
     # на каждом запуске.
     #
-    # Каталог НЕ в /tmp: /tmp чистится при перезагрузке и не предназначен для
-    # постоянных данных. По умолчанию ./logs рядом с compose-файлом,
-    # переопределяется переменной окружения ST_LOGS_DIR.
+    # Каталог по умолчанию — /var/log/storage, по аналогии с соседним проектом
+    # (/var/log/downloads). НЕ в /tmp: /tmp чистится при перезагрузке и не
+    # предназначен для постоянных данных. Переопределяется переменной окружения
+    # ST_LOGS_DIR.
+    #
+    # ВНИМАНИЕ: путь должен совпадать в трёх местах — здесь, в deploy.sh
+    # (LOGS_DIR) и в site/logrotate-storage. Docker создаст отсутствующий
+    # каталог сам, но от root: ему нужен root и на записи logrotate.
     volumes:
-      - ${ST_LOGS_DIR:-./logs}:/var/log/nginx
+      - ${ST_LOGS_DIR:-/var/log/storage}:/var/log/nginx
     healthcheck:
       # 127.0.0.1, а не localhost: localhost резолвится в ::1, а nginx внутри
       # контейнера слушает только IPv4. Healthcheck на localhost стабильно

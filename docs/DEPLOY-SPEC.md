@@ -328,13 +328,21 @@ git на этом VPS).
 
 | Слой | Файл | Что пишет | Переживает пересоздание контейнера |
 |---|---|---|---|
-| Контейнер | `~/storage/site/logs/access.log` | все запросы, пришедшие в контейнер | **да** |
-| Контейнер | `~/storage/site/logs/error.log` | ошибки nginx от уровня `warn` | **да** |
+| Контейнер | `/var/log/storage/access.log` | все запросы, пришедшие в контейнер | **да** |
+| Контейнер | `/var/log/storage/error.log` | ошибки nginx от уровня `warn` | **да** |
 | Хостовый nginx | `/var/log/nginx/storage.quantumart.ru.access.log` | все запросы к домену | **да** |
 | Хостовый nginx | `/var/log/nginx/storage.quantumart.ru.error.log` | ошибки прокси: 502, таймауты | **да** |
 
-Каталог логов контейнера переопределяется переменной окружения
-`ST_LOGS_DIR`, по умолчанию `./logs` рядом с compose-файлом.
+Каталог логов — `/var/log/storage`, по аналогии с соседним проектом
+(`/var/log/downloads`). Переопределяется переменной окружения `ST_LOGS_DIR`.
+
+Путь задан в трёх местах, и они обязаны совпадать: `docker-compose.production.yml`
+(том), `deploy.sh` (`LOGS_DIR`, откуда берутся хвосты в выводе) и
+`logrotate-storage`. Расхождение не роняет деплой, а делает его тихо
+неполезным: в выводе будут пустые хвосты, а ротация перестанет работать.
+
+Каталог создаёт сам Docker при первом запуске контейнера, от `root` — иначе и
+запись, и `logrotate` не справятся.
 
 **Почему не в `/tmp`:** `/tmp` чистится при перезагрузке. Постоянные данные
 кладут рядом с проектом, это же решение в соседнем проекте `downloads`.
@@ -349,9 +357,10 @@ git на этом VPS).
 ### Как смотреть
 
 ```bash
-tail -f ~/storage/site/logs/access.log              # кто и что качает
-grep ' 404 ' ~/storage/site/logs/access.log         # запросы к несуществующим файлам
-grep -E ' (500|502|503|504) ' ~/storage/site/logs/access.log
+LOGDIR="${ST_LOGS_DIR:-/var/log/storage}"
+tail -f "$LOGDIR/access.log"                       # кто и что качает
+grep ' 404 ' "$LOGDIR/access.log"                  # запросы к несуществующим файлам
+grep -E ' (500|502|503|504) ' "$LOGDIR/access.log"
 sudo tail -f /var/log/nginx/storage.quantumart.ru.error.log   # ошибки прокси
 ```
 

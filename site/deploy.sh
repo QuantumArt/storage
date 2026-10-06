@@ -151,7 +151,8 @@ echo "📋 web: $WEB_CONTAINER"
 # Логи nginx — в файлы на хосте, а не в stdout, поэтому `docker logs` после
 # перехода на файлы показывает пустоту (такая же ошибка стоит в соседнем
 # проекте downloads). Показываем хвосты файлов и говорим, где они лежат.
-LOGS_DIR="${ST_LOGS_DIR:-$SCRIPT_DIR/logs}"
+LOGS_DIR="${ST_LOGS_DIR:-/var/log/storage}"   # тот же путь, что в compose
+# и в site/logrotate-storage: расхождение здесь означает пустые хвосты.
 echo "  Логи nginx:"
 for f in access.log error.log; do
     if [ -f "$LOGS_DIR/$f" ]; then
@@ -262,8 +263,8 @@ echo "🎉 Deploy complete!"
 docker compose -f "$COMPOSE_FILE" ps
 echo ""
 echo "💡 Полезные команды:"
-echo "   Логи (хост):    tail -f $SCRIPT_DIR/logs/access.log"
-echo "   Ошибки nginx:   tail -f $SCRIPT_DIR/logs/error.log"
+echo "   Логи (хост):    tail -f ${ST_LOGS_DIR:-/var/log/storage}/access.log"
+echo "   Ошибки nginx:   tail -f ${ST_LOGS_DIR:-/var/log/storage}/error.log"
 echo "   Логи (stdout):  docker logs $WEB_CONTAINER -f   # только вывод при сбоях,"
 echo "                                                 # nginx пишет в файлы"
 echo "   Рестарт:        docker compose -f $COMPOSE_FILE restart web"
