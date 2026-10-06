@@ -22,3 +22,8 @@ files-pass1/
 .DS_Store
 __pycache__/
 *.pyc
+
+# Каталог с логами nginx на хосте: содержимое операционное, в git не идёт.
+# Каталог создаётся compose при первом запуске.
+site/logs/
+logs/

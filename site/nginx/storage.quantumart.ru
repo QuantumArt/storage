@@ -42,6 +42,13 @@ server {
     ssl_certificate     /etc/letsencrypt/live/storage.quantumart.ru/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/storage.quantumart.ru/privkey.pem;
 
+    # Файлы журнала с именем домена, а не общий access.log: на этом сервере
+    # один nginx обслуживает несколько доменов, и общий файл невозможно
+    # прочитать по одному сайту. Формат тот же, что у соседних проектов
+    # (downloads.quantumart.ru.access.log и .error.log).
+    access_log /var/log/nginx/storage.quantumart.ru.access.log;
+    error_log  /var/log/nginx/storage.quantumart.ru.error.log;
+
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
     ssl_session_cache shared:SSL:10m;

@@ -1,0 +1,24 @@
+# Ротация журналов хранилища файлов.
+#
+# Ставится на VPS timeweb:
+#   sudo cp ~/storage/site/logrotate-storage /etc/logrotate.d/storage
+#   sudo chown root:root /etc/logrotate.d/storage
+#   sudo chmod 644 /etc/logrotate.d/storage
+#   sudo logrotate -d /etc/logrotate.d/storage    # проверка, без применения
+#
+# Без этого файлы в ~/storage/site/logs/ растут без ограничений и в состоянии
+# съесть диск. Такой же конфиг соседнего проекта downloads описан у него в
+# DEPLOY.md, но там он тоже не установлен — здесь он сразу приезжает рабочим.
+#
+# `copytruncate` обязателен: nginx держит файл открытым, и простое
+# переименование его не отпустит — после ротации nginx продолжит писать в
+# старый inode, и файл снова вырастет.
+/root/storage/site/logs/*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    copytruncate
+}

@@ -147,7 +147,23 @@ if [ -z "$WEB_CONTAINER" ]; then
     print_error "Container not running. Check: docker compose -f $COMPOSE_FILE ps"
 fi
 echo "📋 web: $WEB_CONTAINER"
-docker logs "$WEB_CONTAINER" --tail 30
+
+# Логи nginx — в файлы на хосте, а не в stdout, поэтому `docker logs` после
+# перехода на файлы показывает пустоту (такая же ошибка стоит в соседнем
+# проекте downloads). Показываем хвосты файлов и говорим, где они лежат.
+LOGS_DIR="${ST_LOGS_DIR:-$SCRIPT_DIR/logs}"
+echo "  Логи nginx:"
+for f in access.log error.log; do
+    if [ -f "$LOGS_DIR/$f" ]; then
+        echo "    --- $LOGS_DIR/$f"
+        tail -n 10 "$LOGS_DIR/$f" | sed 's/^/      /'
+    fi
+done
+if [ -d "$LOGS_DIR" ] && [ -z "$(ls -A "$LOGS_DIR" 2>/dev/null)" ]; then
+    echo "    (каталог $LOGS_DIR пуст — это нормально: контейнер ещё не получал"
+    echo "     запросов, либо файлы только что появились)"
+fi
+echo "    Ротация: sudo logrotate -f /etc/logrotate.d/storage 2>/dev/null || true"
 
 echo ""
 echo "🌐 Step 4: HTTP smoke test..."
@@ -246,7 +262,10 @@ echo "🎉 Deploy complete!"
 docker compose -f "$COMPOSE_FILE" ps
 echo ""
 echo "💡 Полезные команды:"
-echo "   Логи:           docker logs $WEB_CONTAINER -f"
+echo "   Логи (хост):    tail -f $SCRIPT_DIR/logs/access.log"
+echo "   Ошибки nginx:   tail -f $SCRIPT_DIR/logs/error.log"
+echo "   Логи (stdout):  docker logs $WEB_CONTAINER -f   # только вывод при сбоях,"
+echo "                                                 # nginx пишет в файлы"
 echo "   Рестарт:        docker compose -f $COMPOSE_FILE restart web"
 echo "   Reload nginx:   sudo systemctl reload nginx"
 echo ""

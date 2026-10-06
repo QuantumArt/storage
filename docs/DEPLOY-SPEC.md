@@ -321,3 +321,59 @@ git на этом VPS).
 - [ ] `nginx -t` проходит **до** reload
 - [ ] DNS переключён **после** сертификата и nginx
 - [ ] `curl -I https://storage.quantumart.ru/downloads/QP8.zip` → 302 на `objects.githubusercontent.com`
+
+## 10. Логи
+
+### Где лежат
+
+| Слой | Файл | Что пишет | Переживает пересоздание контейнера |
+|---|---|---|---|
+| Контейнер | `~/storage/site/logs/access.log` | все запросы, пришедшие в контейнер | **да** |
+| Контейнер | `~/storage/site/logs/error.log` | ошибки nginx от уровня `warn` | **да** |
+| Хостовый nginx | `/var/log/nginx/storage.quantumart.ru.access.log` | все запросы к домену | **да** |
+| Хостовый nginx | `/var/log/nginx/storage.quantumart.ru.error.log` | ошибки прокси: 502, таймауты | **да** |
+
+Каталог логов контейнера переопределяется переменной окружения
+`ST_LOGS_DIR`, по умолчанию `./logs` рядом с compose-файлом.
+
+**Почему не в `/tmp`:** `/tmp` чистится при перезагрузке. Постоянные данные
+кладут рядом с проектом, это же решение в соседнем проекте `downloads`.
+
+**Почему не в `docker logs`:** nginx в образе пишет в `/dev/stdout`, но том
+монтируется поверх `/var/log/nginx`, и symlink-и заменяются настоящими
+файлами. Побочный эффект: `docker logs storage-web` показывает только вывод
+при сбоях и рестартах, но не журнал посещений. В `deploy.sh` шаг 3 поэтому
+печатает хвосты файлов, а не `docker logs` — в соседнем проекте там стоит
+`docker logs`, и после перехода на файлы он показывает пустоту.
+
+### Как смотреть
+
+```bash
+tail -f ~/storage/site/logs/access.log              # кто и что качает
+grep ' 404 ' ~/storage/site/logs/access.log         # запросы к несуществующим файлам
+grep -E ' (500|502|503|504) ' ~/storage/site/logs/access.log
+sudo tail -f /var/log/nginx/storage.quantumart.ru.error.log   # ошибки прокси
+```
+
+В access.log видно и код, и URL. Наш 404 отличается от 404-а GitHub: свой
+контейнер отвечает `404` сразу, если имени нет в манифесте, и тогда записи в
+логе **не будет** — запрос дальше не уходит.
+
+### Ротация
+
+У соседей ротации нет, и логи растут без ограничений. Здесь она приезжает
+вместе с проектом:
+
+```bash
+sudo cp ~/storage/site/logrotate-storage /etc/logrotate.d/storage
+sudo chown root:root /etc/logrotate.d/storage
+sudo chmod 644 /etc/logrotate.d/storage
+sudo logrotate -d /etc/logrotate.d/storage    # проверка, без применения
+```
+
+`copytruncate` обязателен: nginx держит файл открытым, и простое
+переименование его не отпустит.
+
+Журнал docker (`json-file`) ограничен отдельно: `max-size 10m`,
+`max-file 3` в compose. Основные логи в stdout не идут, но вывод при падении
+контейнера идёт, а цикл рестартов без ограничения съел бы диск.
