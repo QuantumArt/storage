@@ -34,6 +34,11 @@ URLS_DOCS = ROOT / "manifest" / "source-urls-docs.txt"
 FILES = ROOT / "files"
 MANIFEST = ROOT / "manifest" / "manifest.json"
 REFERENCE = ROOT / "manifest" / "reference-sha256.txt"
+# Файлы, в которых мы сами переписали ссылки на старый хост. Их нельзя
+# перекачивать с оригинала: скачивание вернуло бы старые ссылки внутри
+# PDF, и правка молча потерялась бы. Их хеши в REFERENCE остаются
+# оригинальными — это baseline для проверки скачанного с оригинала.
+REWRITTEN = ROOT / "manifest" / "rewritten-files.txt"
 
 RETRIES = 8
 CHUNK = 1 << 20
@@ -68,6 +73,14 @@ def read_urls(path: Path | None = None) -> list[str]:
         if line and not line.startswith("#"):
             seen.setdefault(line, None)
     return list(seen)
+
+
+def rewritten_names() -> set[str]:
+    """Имена файлов, которые мы переписали (см. manifest/rewritten-files.txt)."""
+    if not REWRITTEN.exists():
+        return set()
+    return {l.strip() for l in REWRITTEN.read_text(encoding="utf-8").splitlines()
+            if l.strip() and not l.startswith("#")}
 
 
 def target_name(url: str) -> str:
@@ -246,6 +259,9 @@ def main() -> int:
                     help="файл со списком URL (по умолчанию source-urls.txt)")
     ap.add_argument("--out", default="files",
                     help="каталог для скачивания (по умолчанию files/)")
+    ap.add_argument("--restore-originals", action="store_true",
+                    help="перекачать и файлы, у которых мы переписали ссылки "
+                         "(вернёт старые ссылки внутри PDF)")
     args = ap.parse_args()
 
     if args.out != "files":
@@ -267,6 +283,20 @@ def main() -> int:
         sys.exit("curl не найден")
 
     urls = read_urls(Path(args.list).expanduser() if args.list else URLS)
+
+    if not args.restore_originals:
+        skip = rewritten_names()
+        if skip:
+            kept = []
+            for u in urls:
+                original = target_name(u)
+                name = RENAMES.get(original, original)
+                if name in skip:
+                    print(f"  пропущен (ссылки переписаны нами): {name}", flush=True)
+                    continue
+                kept.append(u)
+            urls = kept
+
     FILES.mkdir(parents=True, exist_ok=True)
     print(f"файлов в списке: {len(urls)}, каталог: {FILES}", flush=True)
 

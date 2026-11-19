@@ -1,0 +1,27 @@
+# Файлы, в которых ссылки на старый хост переписаны на новые адреса.
+#
+# Байты этих файлов намеренно отличаются от оригинала на старом хосте:
+# переписаны тексты ссылок внутри PDF. Оригинальные хеши — в
+# manifest/reference-sha256.txt (baseline для скачивания с оригинала),
+# хеши того, что мы раздаём, — в manifest/manifest.json.
+#
+# tools/fetch_origin.py не перекачивает эти файлы: иначе правка
+# ссылок молча потерялась бы.
+install_angular.pdf
+install_graphql.pdf
+install_react.pdf
+qp8-admin-man.pdf
+qp8-dev-man.pdf
+qp8-dpc-impact-user-man.pdf
+qp8-dpc-pdf-user-man.pdf
+qp8-dpc-user-man.pdf
+qp8-functional-characteristics.pdf
+qp8-graphql-user-man.pdf
+qp8-pg-admin-man.pdf
+qp8-pg-functional-characteristics.pdf
+qp8-search-functions.pdf
+qp8-search-installation-manual.pdf
+qp8-widgets-admin-man.pdf
+qp8-widgets-angular-user-man.pdf
+qp8-widgets-editor-man.pdf
+qp8-widgets-react_user_man.pdf

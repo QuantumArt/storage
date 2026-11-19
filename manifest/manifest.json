@@ -2,7 +2,7 @@
   "release": "v1",
   "repo": "QuantumArt/storage",
   "count": 114,
-  "total_bytes": 1489163975,
+  "total_bytes": 1487625162,
   "files": [
     {
       "name": "01_politika_obrabotka_pdn_202311_finalnaya_redakciya.pdf",
@@ -332,20 +332,20 @@
     {
       "name": "install_angular.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/install_angular.pdf",
-      "size": 1106576,
-      "sha256": "4d3af80d1a79f61699ccb653a61c29fcad300a995f8284b2066242c92824c88b"
+      "size": 1088792,
+      "sha256": "77c48cb4df6645c9b0099a6928f619c0322dea4ca741db15dee0290211dd73e9"
     },
     {
       "name": "install_graphql.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/install_graphql.pdf",
-      "size": 490453,
-      "sha256": "a755573ae416e6d50bd4e1e83fb67450acfbfb1987a24bc8934e495a08e75eeb"
+      "size": 472649,
+      "sha256": "591c059994b698910a799e77f26e012178b27de5c98879820eb602d582f78b84"
     },
     {
       "name": "install_react.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/install_react.pdf",
-      "size": 1136381,
-      "sha256": "2927f07b5807a3cd0b5979b6e8e931d0ab7456cc61a5cd39f1680c68f38cfca1"
+      "size": 1116198,
+      "sha256": "edd4704df3acc17a70e398d61893fc20a0916bd81a09603ec2cbecb3941f6a89"
     },
     {
       "name": "mapping.zip",
@@ -422,14 +422,14 @@
     {
       "name": "qp8-admin-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-admin-man.pdf",
-      "size": 1514708,
-      "sha256": "a960c57806e90a96080f0271e0aa802e2c70cc94bb27bed81fbc0bba59fb629d"
+      "size": 1439648,
+      "sha256": "b0217a0f193aa722edaca4d85850995fb7eebed9746b0f0957fcd9d542c9ab65"
     },
     {
       "name": "qp8-dev-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-dev-man.pdf",
-      "size": 5869479,
-      "sha256": "fbe341256ef060d129f7ce544b328ae65f41ba76acd0cf17daa99a1a526540dc"
+      "size": 5448004,
+      "sha256": "3c4dd36ebd9ff8bacf28d7c6dbcf55992a9cf1201b551c7f63ba886215db56e9"
     },
     {
       "name": "qp8-dpc-functional-requirements.pdf",
@@ -446,8 +446,8 @@
     {
       "name": "qp8-dpc-impact-user-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-dpc-impact-user-man.pdf",
-      "size": 1399834,
-      "sha256": "6c56c803d8b6c7af12d2c43833d7487c73865ca17417ff09422034ed9e225812"
+      "size": 1357486,
+      "sha256": "01f1cc9b5f16fb4d8b600771242a3554ca38d227f47b038afd5aa39adbaaff2f"
     },
     {
       "name": "qp8-dpc-pdf-functional-requirements.pdf",
@@ -458,14 +458,14 @@
     {
       "name": "qp8-dpc-pdf-user-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-dpc-pdf-user-man.pdf",
-      "size": 1816301,
-      "sha256": "f01767f442e279ddf61952fb686f29eff8d5f85ca0445e48299a130c7bd57b8a"
+      "size": 1756472,
+      "sha256": "3d4ca6bc75fa25e64ce1fbf691a2158c5ad754d165a20f2175351df0eaa89f6b"
     },
     {
       "name": "qp8-dpc-user-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-dpc-user-man.pdf",
-      "size": 5808759,
-      "sha256": "f8c00b7434815c84e490ca990dcccfb0601db5b2d84342cf7e0288c604000641"
+      "size": 5478034,
+      "sha256": "834fcd57b7cec6314be15ffe30d9c6d866d0c2bd0e9944d161ec6f8e61d8a613"
     },
     {
       "name": "qp8-editor-man.pdf",
@@ -476,26 +476,26 @@
     {
       "name": "qp8-functional-characteristics.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-functional-characteristics.pdf",
-      "size": 233660,
-      "sha256": "39b03388d6ddd087e9910ebaa82653facd3a9468e6dd54803e16d0580d071656"
+      "size": 224005,
+      "sha256": "6f5f6bb2342befd155cdcff68d72c148640e8121f18065654026b39062674af2"
     },
     {
       "name": "qp8-graphql-user-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-graphql-user-man.pdf",
-      "size": 1696395,
-      "sha256": "5417f4195a7fbc26b67381b387af9cefa4f4f4e426f6f791a8df01c3a79474c1"
+      "size": 1652222,
+      "sha256": "7ac838ce0cd0281a1eefd2158487de47cd474b30a9366a6fcefab16edf600f66"
     },
     {
       "name": "qp8-pg-admin-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-pg-admin-man.pdf",
-      "size": 3528042,
-      "sha256": "0cc2a37d44b0d910c2ed2301456121e644f7a7d0f665f9fb706368003e481a4d"
+      "size": 3383183,
+      "sha256": "c420563634174dff874a85da8667b1a3ef8e1f22c25a9c3102391459705f0354"
     },
     {
       "name": "qp8-pg-functional-characteristics.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-pg-functional-сharacteristics.pdf",
-      "size": 303005,
-      "sha256": "2a9cfcfea51f3ed4cb1dd85ae33d0787e44e70b58819cbfd41b88a3597cb6727",
+      "size": 289611,
+      "sha256": "7e684f56b2c7dc9b620d1356e769145ad853ed211306f92dce21e9b9c35082b0",
       "original_name": "qp8-pg-functional-сharacteristics.pdf"
     },
     {
@@ -573,14 +573,14 @@
     {
       "name": "qp8-search-functions.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-search-functions.pdf",
-      "size": 850885,
-      "sha256": "add69dfc4e9b23876bc1ed9877bad3d58b0ca712f92173b31c5338dac2ab7bc4"
+      "size": 844647,
+      "sha256": "b9e660524af5c9836017ec2e5f8abe02c9582fbf62e25e03a5fb8aa274df29dd"
     },
     {
       "name": "qp8-search-installation-manual.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-search-installation-manual.pdf",
-      "size": 1533159,
-      "sha256": "372e5913b1e04addcf769ac7d16db7451f504be53b891f09e0c97d5c026383a9"
+      "size": 1506362,
+      "sha256": "dbe8a87ae1fc83a955df948aad2ef6b91df05ce6e37ad6294790a61c6f17e367"
     },
     {
       "name": "qp8-search-integration-developer-man.pdf",
@@ -597,14 +597,14 @@
     {
       "name": "qp8-widgets-admin-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-widgets-admin-man.pdf",
-      "size": 1639153,
-      "sha256": "1524c7db1c8186d429d65c65e2cab050b7bc6d2cc8dcfac63581de82ab4994db"
+      "size": 1562540,
+      "sha256": "45935c6b00358693236e46e9b331670c14e9374746f2eb70d4e5197cbaea68e0"
     },
     {
       "name": "qp8-widgets-angular-user-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-widgets-angular-user-man.pdf",
-      "size": 1407993,
-      "sha256": "e49cf167d8ab39b411d5df9e3e1fca2856e9b72a21b4cef0af3daf61e0fbf62b"
+      "size": 1343412,
+      "sha256": "837d3eecf5ce56369ccb1b155a94d06e94f1161b2fd8d1e94bbd417c196648f1"
     },
     {
       "name": "qp8-widgets-dev-man.pdf",
@@ -615,8 +615,8 @@
     {
       "name": "qp8-widgets-editor-man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-widgets-editor-man.pdf",
-      "size": 2639334,
-      "sha256": "b1ed52fabbbf412434af0ca567df14522b530b5899ba210650d2d64d0d7dd6d9"
+      "size": 2545850,
+      "sha256": "8d436dda3210316277d9acb4d9ec6e4f24d0f6212228ea61cdfe7c4b9561ca4e"
     },
     {
       "name": "qp8-widgets-functional-requirements.pdf",
@@ -627,8 +627,8 @@
     {
       "name": "qp8-widgets-react_user_man.pdf",
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qp8-widgets-react_user_man.pdf",
-      "size": 3152783,
-      "sha256": "4cc40cf5eea7f1fb03d4d6063c5e1b72de3f4dc9f7b7abde79b7673b560a87db"
+      "size": 3078972,
+      "sha256": "d4bf3870a73d8055dcbe8010d9ac6c3c9805e66ba9a256ca2d7cf4d558524eb1"
     },
     {
       "name": "qpconfig.tar",

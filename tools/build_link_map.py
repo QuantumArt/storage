@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
-"""Собрать карту редиректов для алиаса storage.qp.qsupport.ru.
+"""Собрать карту соответствия старых ссылок новым.
 
-Зачем: внутри 66 PDF нашего релиза 80 ссылок ведут на storage.qp.qsupport.ru —
-домен, у которого больше нет DNS-записи. Читатель PDF кликает по ссылке и
-получает ошибку. Этот алиас отдаёт те же пути на новые адреса (302), и ссылки
-внутри PDF продолжают работать.
+Зачем: внутри PDF-инструкций релиза (66 файлов) 80 ссылок ведут на
+storage.qp.qsupport.ru — домен, у которого больше нет DNS-записи. Карта
+переводит каждый такой путь на рабочий адрес: файлы хранилища → наше
+хранилище, картинки и содержимое → quantumart.ru/_cdn.
 
-Вход:  manifest/redirect-paths.txt — все пути на старом хосте, которые
-       встречаются в наших проектах (внутри PDF релиза, в разметке
-       quantumart). Список зафиксирован, чтобы карта была воспроизводимой.
-Выход: manifest/redirect-map.json       — правила в машинном виде
-       site/nginx/storage.qp.qsupport.ru.map — блок map для nginx
+Вход:  manifest/link-paths.txt — все пути на старом хосте, встречающиеся в
+       наших проектах. Список зафиксирован, чтобы карта была
+       воспроизводимой.
+Выход: manifest/link-map.json — соответствия старых путей новым адресам.
 
-Категории и их порядок (в блоке map сначала проверяются точные ключи, потом
-регулярки по порядку):
+Категории и их порядок:
 
   1. четыре точных исключения — на оригинале имя битое, у нас правильное;
   2. qa_official_site/images/downloads/       → наше хранилище;
@@ -23,8 +21,8 @@
   6. qa_official_site/contents/* → quantumart.ru/_cdn/contents/...
 
 Запуск:
-    python3 tools/build_redirect_map.py
-    python3 tools/build_redirect_map.py --check   # дополнительно проверить цели
+    python3 tools/build_link_map.py
+    python3 tools/build_link_map.py --check   # дополнительно проверить цели
 """
 
 from __future__ import annotations
@@ -36,17 +34,15 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PATHS = ROOT / "manifest" / "redirect-paths.txt"
-JSON_OUT = ROOT / "manifest" / "redirect-map.json"
-NGINX_OUT = ROOT / "site" / "nginx" / "storage.qp.qsupport.ru.map"
+PATHS = ROOT / "manifest" / "link-paths.txt"
+OUT = ROOT / "manifest" / "link-map.json"
 
 STORE = "https://storage.quantumart.ru/downloads/"
 CDN = "https://quantumart.ru/_cdn/"
 OLD_PREFIX = "qa_official_site/"
 
 # Точные исключения. На старом хосте эти имена битые (опечатка или другой
-# формат), у нас файлы лежат под правильными именами. Без исключений ссылка
-# внутри PDF вела бы в никуда.
+# формат), у нас файлы лежат под правильными именами.
 EXACT = {
     "qa_official_site/images/downloads/QP_Setup_7.9.7.0..zip":
         STORE + "QP_Setup_7.9.7.0.zip",
@@ -65,11 +61,10 @@ DOC_EXT = (".pdf", ".docx", ".doc")
 
 
 def normalize(path: str) -> str:
-    """Путь в том виде, в каком его отдаёт nginx в переменной $uri.
+    """Путь в том виде, в каком он стоит в ссылке.
 
-    $uri уже схлопывает повторяющиеся слеши и декодирует %XX, поэтому ключ
-    в карте должен быть таким же: с один слешем и в UTF-8, а не в
-    percent-encoding.
+    Двойные слеши схлопываются: в PDF-ссылках реально встречается
+    «images//laptop.svg», а новый адрес строим от нормализованного пути.
     """
     p = path.lstrip("/")
     while "//" in p:
@@ -78,7 +73,7 @@ def normalize(path: str) -> str:
 
 
 def target(path: str) -> tuple[str | None, str]:
-    """Куда отправляем запрос. None — правила для этого пути нет."""
+    """Куда отправляем запрос. None — соответствия для этого пути нет."""
     p = normalize(path)
     if p in EXACT:
         return EXACT[p], "exact"
@@ -122,33 +117,12 @@ def build() -> list[list]:
         rows.append([normalize(p), t, kind])
     rows.sort(key=lambda r: r[0])
     if norule:
-        print("ВНИМАНИЕ: без правила:", norule)
+        print("ВНИМАНИЕ: без соответствия:", norule)
     return rows
 
 
-def nginx_block(rows: list[list]) -> str:
-    bucket = 64
-    while bucket < len(rows) * 4:
-        bucket *= 2
-    lines = [
-        "# Сгенерировано tools/build_redirect_map.py из manifest/redirect-paths.txt.",
-        "# Не редактировать: правки пропадут при следующей генерации.",
-        f"# Правил: {len(rows)}.",
-        "",
-        f"map_hash_bucket_size {bucket};   # для {len(rows)} точных ключей",
-        "map_hash_max_size 4096;",
-        "",
-        "map $uri $qp_redirect_target {",
-        '    default "";',
-    ]
-    for path, tgt, _kind in rows:
-        lines.append(f'    "/{path}" "{tgt}";')
-    lines.append("}")
-    return "\n".join(lines) + "\n"
-
-
 def check(rows: list[list]) -> int:
-    """Проверить, что все цели отвечают 200. Медленно: 360 запросов."""
+    """Проверить, что все новые адреса отвечают 200. Медленно: 360 запросов."""
     def head(row):
         path, tgt, _kind = row
         r = subprocess.run(
@@ -162,7 +136,7 @@ def check(rows: list[list]) -> int:
         for path, tgt, code in ex.map(head, rows):
             if code != "200":
                 bad.append((code, path, tgt))
-    print(f"целей проверено: {len(rows)}, не-200: {len(bad)}")
+    print(f"адресов проверено: {len(rows)}, не-200: {len(bad)}")
     for code, path, tgt in bad:
         print(f"  [{code}] {path}\n       -> {tgt}")
     return 1 if bad else 0
@@ -171,16 +145,14 @@ def check(rows: list[list]) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true",
-                    help="дополнительно проверить, что цели отвечают 200")
+                    help="дополнительно проверить, что адреса отвечают 200")
     args = ap.parse_args()
 
     rows = build()
-    JSON_OUT.write_text(json.dumps(rows, ensure_ascii=False, indent=1) + "\n",
-                        encoding="utf-8")
-    NGINX_OUT.parent.mkdir(parents=True, exist_ok=True)
-    NGINX_OUT.write_text(nginx_block(rows), encoding="utf-8")
-    print(f"правил: {len(rows)}")
-    print(f"записано: {JSON_OUT.relative_to(ROOT)}, {NGINX_OUT.relative_to(ROOT)}")
+    OUT.write_text(json.dumps(rows, ensure_ascii=False, indent=1) + "\n",
+                   encoding="utf-8")
+    print(f"соответствий: {len(rows)}")
+    print(f"записано: {OUT.relative_to(ROOT)}")
     if args.check:
         return check(rows)
     return 0
