@@ -24,6 +24,7 @@ MANIFEST = ROOT / "manifest" / "manifest.json"
 LISTS = [
     ROOT / "manifest" / "source-urls.txt",
     ROOT / "manifest" / "source-urls-docs.txt",
+    ROOT / "manifest" / "source-urls-pdf.txt",
 ]
 CHUNK = 1 << 20
 

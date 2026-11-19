@@ -1,8 +1,8 @@
 {
   "release": "v1",
   "repo": "QuantumArt/storage",
-  "count": 113,
-  "total_bytes": 1487624592,
+  "count": 114,
+  "total_bytes": 1489163975,
   "files": [
     {
       "name": "01_politika_obrabotka_pdn_202311_finalnaya_redakciya.pdf",
@@ -635,6 +635,12 @@
       "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qpconfig.tar",
       "size": 19968,
       "sha256": "1c7be8c0f30d736b211faa7a0e8d838de1b6f0a0ee244995481be81d9adf0dac"
+    },
+    {
+      "name": "qpdb.tar.gz",
+      "url": "https://storage.qp.qsupport.ru/qa_official_site/images/downloads/qpdb.tar.gz",
+      "size": 1539383,
+      "sha256": "850094509f6b674b4ada6890394d69791d2cdd8d079b05ef5b6bb212dc5797c8"
     },
     {
       "name": "source.zip",
